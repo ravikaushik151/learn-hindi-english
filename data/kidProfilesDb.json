@@ -1,0 +1,45 @@
+[
+  {
+    "id": "child-default-1",
+    "name": "Jeevika",
+    "age": 9,
+    "avatar": "🦋",
+    "grade": "Class 1",
+    "createdAt": 1793602344707,
+    "englishStars": 0,
+    "hindiStars": 9,
+    "streakDays": 1,
+    "lastActiveDate": "2026-11-02",
+    "completedLessons": [],
+    "masteredWords": [],
+    "practiceHistory": [],
+    "focusWords": [],
+    "badges": [
+      "badge-starter"
+    ],
+    "kidCode": "JEEV-5533",
+    "pin": "1234"
+  },
+  {
+    "id": "child-rai-1",
+    "name": "Rai",
+    "age": 6,
+    "avatar": "🦁",
+    "grade": "Class 1",
+    "englishStars": 30,
+    "hindiStars": 15,
+    "kidCode": "RAI-5678",
+    "pin": "4321",
+    "completedLessons": [
+      "lesson-1"
+    ],
+    "masteredWords": [
+      "Apple"
+    ],
+    "practiceHistory": [],
+    "focusWords": [],
+    "badges": [
+      "badge-starter"
+    ]
+  }
+]

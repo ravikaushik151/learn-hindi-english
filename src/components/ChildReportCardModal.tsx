@@ -33,11 +33,18 @@ export function ChildReportCardModal() {
     openProfileModal,
     openEditModal,
     markWordMastered,
+    isLoggedIn,
   } = useChildProfile();
 
   const { isEnglish, isHindi, t, shouldShowHindi } = useLanguage();
   const { speakEnglish, speakHindi } = useSpeech();
   const [activeTab, setActiveTab] = useState<'history' | 'focus' | 'badges' | 'certificate'>('history');
+
+  const studentName = isLoggedIn
+    ? activeProfile.name
+    : isHindi
+    ? 'नन्हा छात्र'
+    : 'Young Explorer';
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -45,7 +52,12 @@ export function ChildReportCardModal() {
     const totalAttempts = history.length;
     const correctCount = history.filter((h) => h.isCorrect).length;
     const accuracy = totalAttempts > 0 ? Math.round((correctCount / totalAttempts) * 100) : 100;
-    const totalStars = (activeProfile.englishStars || 0) + (activeProfile.hindiStars || 0);
+    const totalStars =
+      (activeProfile.englishStars || 0) +
+      (activeProfile.hindiStars || 0) +
+      (activeProfile.mathsStars || 0) +
+      (activeProfile.scienceStars || 0) +
+      (activeProfile.gkStars || 0);
 
     return {
       totalAttempts,
@@ -98,7 +110,7 @@ export function ChildReportCardModal() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow-sm">
-                    {activeProfile.name}
+                    {studentName}
                   </h2>
                   <span className="px-2 py-0.5 rounded-full bg-white/25 text-xs font-black text-white">
                     {activeProfile.grade || 'Junior'}
@@ -165,34 +177,54 @@ export function ChildReportCardModal() {
         </div>
 
         {/* ========================================================
-            QUICK STATS SUMMARY TILES
+            QUICK STATS SUMMARY TILES (All 5 Core Subjects)
             ======================================================== */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 sm:p-4 bg-amber-50/60 border-b-2 border-amber-200">
-          <div className="bg-white p-3 rounded-2xl border border-amber-200 text-center shadow-xs">
-            <span className="text-xs font-bold text-stone-500">{t('English Stars 🇬🇧', 'इंग्लिश सितारे 🇬🇧')}</span>
-            <div className="text-xl font-black text-indigo-600 mt-0.5">
-              ⭐ {activeProfile.englishStars || 0}
+        <div className="p-3 sm:p-4 bg-amber-50/60 border-b-2 border-amber-200 space-y-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <div className="bg-white p-2.5 rounded-2xl border border-purple-200 text-center shadow-2xs">
+              <span className="text-[11px] font-bold text-stone-500 block">Science 🔬</span>
+              <div className="text-lg font-black text-purple-700 mt-0.5">
+                ⭐ {activeProfile.scienceStars || 0}
+              </div>
+            </div>
+
+            <div className="bg-white p-2.5 rounded-2xl border border-teal-200 text-center shadow-2xs">
+              <span className="text-[11px] font-bold text-stone-500 block">GK 🌍</span>
+              <div className="text-lg font-black text-teal-700 mt-0.5">
+                ⭐ {activeProfile.gkStars || 0}
+              </div>
+            </div>
+
+            <div className="bg-white p-2.5 rounded-2xl border border-blue-200 text-center shadow-2xs">
+              <span className="text-[11px] font-bold text-stone-500 block">Maths 🔢</span>
+              <div className="text-lg font-black text-blue-700 mt-0.5">
+                ⭐ {activeProfile.mathsStars || 0}
+              </div>
+            </div>
+
+            <div className="bg-white p-2.5 rounded-2xl border border-indigo-200 text-center shadow-2xs">
+              <span className="text-[11px] font-bold text-stone-500 block">English 🇬🇧</span>
+              <div className="text-lg font-black text-indigo-700 mt-0.5">
+                ⭐ {activeProfile.englishStars || 0}
+              </div>
+            </div>
+
+            <div className="bg-white p-2.5 rounded-2xl border border-orange-200 text-center shadow-2xs col-span-2 sm:col-span-1">
+              <span className="text-[11px] font-bold text-stone-500 block">Hindi 🇮🇳</span>
+              <div className="text-lg font-black text-orange-700 mt-0.5">
+                ⭐ {activeProfile.hindiStars || 0}
+              </div>
             </div>
           </div>
 
-          <div className="bg-white p-3 rounded-2xl border border-amber-200 text-center shadow-xs">
-            <span className="text-xs font-bold text-stone-500">{t('Hindi Stars 🇮🇳', 'हिंदी सितारे 🇮🇳')}</span>
-            <div className="text-xl font-black text-orange-600 mt-0.5">
-              ⭐ {activeProfile.hindiStars || 0}
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-white p-2.5 rounded-2xl border border-amber-200 text-center shadow-2xs flex items-center justify-around">
+              <span className="text-xs font-bold text-stone-500">{t('Overall Accuracy 🎯', 'सटीकता 🎯')}</span>
+              <span className="text-base font-black text-emerald-600">{stats.accuracy}%</span>
             </div>
-          </div>
-
-          <div className="bg-white p-3 rounded-2xl border border-amber-200 text-center shadow-xs">
-            <span className="text-xs font-bold text-stone-500">{t('Accuracy 🎯', 'सटीकता (Accuracy) 🎯')}</span>
-            <div className="text-xl font-black text-emerald-600 mt-0.5">
-              {stats.accuracy}%
-            </div>
-          </div>
-
-          <div className="bg-white p-3 rounded-2xl border border-amber-200 text-center shadow-xs">
-            <span className="text-xs font-bold text-stone-500">{t('Mastered Words 🗣️', 'कंठस्थ शब्द (Mastered) 🗣️')}</span>
-            <div className="text-xl font-black text-amber-700 mt-0.5">
-              {stats.masteredCount} {t('words', 'शब्द')}
+            <div className="bg-white p-2.5 rounded-2xl border border-amber-200 text-center shadow-2xs flex items-center justify-around">
+              <span className="text-xs font-bold text-stone-500">{t('Mastered Words 🗣️', 'कंठस्थ शब्द 🗣️')}</span>
+              <span className="text-base font-black text-amber-800">{stats.masteredCount} {t('words', 'शब्द')}</span>
             </div>
           </div>
         </div>
@@ -272,10 +304,10 @@ export function ChildReportCardModal() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-black text-stone-800">
-                  {activeProfile.name} द्वारा हाल ही में बोले व पढ़े गए शब्द:
+                  {t(`Recent Words Practiced by ${studentName}:`, `${studentName} द्वारा हाल ही में बोले व पढ़े गए शब्द:`)}
                 </h3>
                 <span className="text-xs text-stone-500 font-medium">
-                  नवीनतम पहले
+                  {t('Newest first', 'नवीनतम पहले')}
                 </span>
               </div>
 
@@ -383,10 +415,13 @@ export function ChildReportCardModal() {
               <div className="bg-amber-100/60 p-4 rounded-2xl border border-amber-300">
                 <h4 className="text-xs font-black text-amber-950 uppercase tracking-wider flex items-center gap-1.5">
                   <AlertCircle className="w-4 h-4 text-amber-700" />
-                  <span>माता-पिता व शिक्षकों के लिए सुझाव (Focus Words)</span>
+                  <span>{t('Parent & Teacher Advice (Focus Words)', 'माता-पिता व शिक्षकों के लिए सुझाव (Focus Words)')}</span>
                 </h4>
                 <p className="text-xs text-stone-600 mt-1">
-                  नीचे वे शब्द हैं जिनमें {activeProfile.name} को थोड़ा और अभ्यास चाहिए। आप साथ बैठकर इन शब्दों की ध्वनि सुनाएं और बुलवाएं।
+                  {t(
+                    `Below are words where ${studentName} needs a bit more practice. Listen to the audio and practice saying them together.`,
+                    `नीचे वे शब्द हैं जिनमें ${studentName} को थोड़ा और अभ्यास चाहिए। आप साथ बैठकर इन शब्दों की ध्वनि सुनाएं और बुलवाएं।`
+                  )}
                 </p>
               </div>
 
@@ -438,7 +473,7 @@ export function ChildReportCardModal() {
                           }}
                           className="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-[10px] rounded-lg border border-emerald-300"
                         >
-                          कंठस्थ हो गया ✓
+                          {t('Mastered ✓', 'कंठस्थ हो गया ✓')}
                         </button>
                       </div>
                     </div>
@@ -447,9 +482,12 @@ export function ChildReportCardModal() {
               ) : (
                 <div className="p-8 text-center bg-emerald-50 rounded-2xl border-2 border-dashed border-emerald-300 text-emerald-800 space-y-2">
                   <div className="text-3xl">🎉</div>
-                  <p className="text-sm font-black">कमाल है! कोई भी कठिन शब्द बाकी नहीं है!</p>
+                  <p className="text-sm font-black">{t('Awesome! No tricky words remaining!', 'कमाल है! कोई भी कठिन शब्द बाकी नहीं है!')}</p>
                   <p className="text-xs text-emerald-600">
-                    {activeProfile.name} ने सभी शब्दों को बहुत अच्छे से सीखा है।
+                    {t(
+                      `${studentName} has mastered all the words with flying colors!`,
+                      `${studentName} ने सभी शब्दों को बहुत अच्छे से सीखा है।`
+                    )}
                   </p>
                 </div>
               )}
@@ -460,7 +498,7 @@ export function ChildReportCardModal() {
           {activeTab === 'badges' && (
             <div className="space-y-4">
               <h3 className="text-sm font-black text-stone-800">
-                {activeProfile.name} की ट्रॉफ़ी व पदक संग्रह:
+                {t(`${studentName}'s Trophies & Badges:`, `${studentName} की ट्रॉफ़ी व पदक संग्रह:`)}
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -550,7 +588,7 @@ export function ChildReportCardModal() {
 
                 <div className="space-y-4 max-w-xl mx-auto">
                   <span className="px-4 py-1 bg-amber-100 text-amber-900 rounded-full text-xs font-black tracking-widest uppercase border border-amber-300">
-                    Certificate of Achievement • प्रशंसा पत्र
+                    {t('Certificate of Achievement', 'प्रशंसा पत्र')}
                   </span>
 
                   <h3 className="text-2xl sm:text-3xl font-black text-stone-900 font-serif">
@@ -558,26 +596,27 @@ export function ChildReportCardModal() {
                   </h3>
 
                   <p className="text-xs sm:text-sm text-stone-600 font-hindi">
-                    यह प्रमाणित किया जाता है कि होनहार छात्र/छात्रा
+                    {t('This is proudly presented to the young explorer', 'यह प्रमाणित किया जाता है कि होनहार छात्र/छात्रा')}
                   </p>
 
                   <div className="py-2">
                     <div className="inline-block border-b-4 border-amber-400 pb-1 px-8 text-2xl sm:text-4xl font-black text-stone-900 font-serif">
-                      {activeProfile.name}
+                      {studentName}
                     </div>
                   </div>
 
                   <p className="text-xs sm:text-sm text-stone-600 font-hindi leading-relaxed">
-                    ने हिंदी एवं अंग्रेजी भाषा सीखने के पाठ्यक्रम में उत्कृष्ट प्रदर्शन करते हुए कुल{' '}
-                    <strong className="text-amber-700 font-black">{stats.totalStars} सितारे</strong>{' '}
-                    अर्जित किए हैं और <strong>{stats.accuracy}% सटीकता</strong> के साथ शब्दों व वाक्यों में निपुणता हासिल की है।
+                    {t(
+                      `for outstanding progress in English & Hindi learning tracks, earning ${stats.totalStars} Stars with ${stats.accuracy}% accuracy in vocabulary and speech!`,
+                      `ने हिंदी एवं अंग्रेजी भाषा सीखने के पाठ्यक्रम में उत्कृष्ट प्रदर्शन करते हुए कुल ${stats.totalStars} सितारे अर्जित किए हैं और ${stats.accuracy}% सटीकता के साथ शब्दों व वाक्यों में निपुणता हासिल की है।`
+                    )}
                   </p>
 
                   {/* Stamp & Signatures */}
                   <div className="pt-8 flex items-center justify-between border-t-2 border-stone-200 mt-6 text-xs text-stone-600">
                     <div>
-                      <div className="font-bold">{new Date().toLocaleDateString('hi-IN')}</div>
-                      <div className="text-[10px] text-stone-400">जारी करने की तिथि</div>
+                      <div className="font-bold">{new Date().toLocaleDateString(isHindi ? 'hi-IN' : 'en-US')}</div>
+                      <div className="text-[10px] text-stone-400">{t('Issue Date', 'जारी करने की तिथि')}</div>
                     </div>
 
                     <div className="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-400 flex flex-col items-center justify-center text-[9px] font-black text-amber-900 shadow-inner">
@@ -587,7 +626,7 @@ export function ChildReportCardModal() {
 
                     <div>
                       <div className="font-bold font-serif italic">Language Academy</div>
-                      <div className="text-[10px] text-stone-400">अकादमी हस्ताक्षर</div>
+                      <div className="text-[10px] text-stone-400">{t('Academy Signature', 'अकादमी हस्ताक्षर')}</div>
                     </div>
                   </div>
                 </div>
@@ -599,15 +638,15 @@ export function ChildReportCardModal() {
 
         {/* Modal Footer */}
         <div className="p-3 sm:p-4 bg-stone-50 border-t-2 border-amber-200 flex items-center justify-between text-xs text-stone-500">
-          <span>बच्चे का नाम: <strong className="text-stone-800">{activeProfile.name}</strong></span>
+          <span>{t('Student Name:', 'बच्चे का नाम:')} <strong className="text-stone-800">{studentName}</strong></span>
           <button
             onClick={() => {
               soundEffects.playPop();
               closeReportModal();
             }}
-            className="px-5 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 font-black rounded-xl"
+            className="px-5 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 font-black rounded-xl cursor-pointer"
           >
-            बंद करें
+            {t('Close', 'बंद करें')}
           </button>
         </div>
 

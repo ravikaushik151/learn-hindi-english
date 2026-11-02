@@ -13,6 +13,7 @@ export function WelcomeSetupModal() {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('🦁');
   const [age, setAge] = useState<number>(6);
+  const [grade, setGrade] = useState<string>('Class 1');
   const [pin, setPin] = useState('1234');
 
   if (!isWelcomeModalOpen) return null;
@@ -24,6 +25,7 @@ export function WelcomeSetupModal() {
       name: finalName,
       avatar,
       age,
+      grade,
       pin: pin.trim() || '1234',
       kidCode: generateKidCode(finalName),
     });
@@ -119,12 +121,46 @@ export function WelcomeSetupModal() {
             </div>
           </div>
 
-          {/* 4. PIN Security */}
+          {/* 4. Grade / School Class Selection */}
+          <div>
+            <label className="block text-xs font-black text-stone-700 uppercase tracking-wider mb-1.5">
+              {t('4. Select School Class:', '4. स्कूल की कक्षा चुनें:')}
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {[
+                { id: 'Nursery', label: 'Nursery / LKG', ageText: '3-4 yrs', defAge: 4 },
+                { id: 'Class 1', label: 'UKG / Class 1', ageText: '5-6 yrs', defAge: 6 },
+                { id: 'Class 2', label: 'Class 2', ageText: '6-7 yrs', defAge: 7 },
+                { id: 'Class 3', label: 'Class 3', ageText: '7-8 yrs', defAge: 8 },
+                { id: 'Class 4', label: 'Class 4 & 5', ageText: '9-11+ yrs', defAge: 10 },
+              ].map((g) => (
+                <button
+                  key={g.id}
+                  type="button"
+                  onClick={() => {
+                    soundEffects.playPop();
+                    setGrade(g.id);
+                    setAge(g.defAge);
+                  }}
+                  className={`p-2 rounded-xl text-left font-black transition-all border ${
+                    grade === g.id
+                      ? 'bg-amber-400 border-amber-500 text-stone-950 shadow-sm scale-102 ring-2 ring-amber-300'
+                      : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-amber-50'
+                  }`}
+                >
+                  <p className="text-xs leading-tight">{g.label}</p>
+                  <p className="text-[10px] font-bold text-stone-500 mt-0.5">{g.ageText}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 5. PIN Security */}
           <div className="bg-amber-50/80 p-3 rounded-2xl border-2 border-amber-200">
             <div className="flex items-center justify-between mb-1">
               <label className="text-xs font-black text-stone-800 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>{t('4. Secret 4-Digit PIN (Default: 1234):', '4. गुप्त 4-अंकों का पिन (डिफ़ॉल्ट: 1234):')}</span>
+                <span>{t('5. Secret 4-Digit PIN (Default: 1234):', '5. गुप्त 4-अंकों का पिन (डिफ़ॉल्ट: 1234):')}</span>
               </label>
               <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
                 {t('PIN Protected', 'पिन सुरक्षित')}

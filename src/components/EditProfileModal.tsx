@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useChildProfile, AVATAR_LIST } from '@/context/ChildProfileContext';
+import { useChildProfile, AVATAR_LIST, isGuestProfileName } from '@/context/ChildProfileContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { soundEffects } from '@/lib/sounds';
 import { X, Check, Sparkles, User, Smile, KeyRound, Copy, CheckCheck, ShieldCheck } from 'lucide-react';
@@ -27,7 +27,7 @@ export function EditProfileModal() {
 
   useEffect(() => {
     if (activeProfile) {
-      setName(activeProfile.name);
+      setName(isGuestProfileName(activeProfile.name) ? '' : activeProfile.name);
       setAvatar(activeProfile.avatar);
       setAge(activeProfile.age);
       setGrade(activeProfile.grade);

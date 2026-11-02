@@ -1,0 +1,63 @@
+[
+  {
+    "id": "science",
+    "nameEnglish": "Science & EVS",
+    "nameHindi": "विज्ञान व पर्यावरण",
+    "icon": "🔬",
+    "color": "from-purple-500 to-indigo-600",
+    "badgeColor": "bg-purple-100 text-purple-800",
+    "description": "Plants, Human Body, Animals, Solar System, Matter & Energy",
+    "grades": ["nursery", "class-1", "class-2", "class-3", "class-4-5"],
+    "isDefault": true,
+    "createdAt": 1740000000000
+  },
+  {
+    "id": "gk",
+    "nameEnglish": "General Knowledge (GK)",
+    "nameHindi": "सामान्य ज्ञान (GK)",
+    "icon": "🌍",
+    "color": "from-teal-500 to-emerald-600",
+    "badgeColor": "bg-teal-100 text-teal-800",
+    "description": "National Symbols, Geography, Inventions, World & India GK",
+    "grades": ["nursery", "class-1", "class-2", "class-3", "class-4-5"],
+    "isDefault": true,
+    "createdAt": 1740000000000
+  },
+  {
+    "id": "maths",
+    "nameEnglish": "Mathematics",
+    "nameHindi": "गणित",
+    "icon": "🔢",
+    "color": "from-blue-500 to-cyan-600",
+    "badgeColor": "bg-blue-100 text-blue-800",
+    "description": "Numbers, Counting, Addition, Subtraction, Multiplication, Geometry",
+    "grades": ["nursery", "class-1", "class-2", "class-3", "class-4-5"],
+    "isDefault": true,
+    "createdAt": 1740000000000
+  },
+  {
+    "id": "english",
+    "nameEnglish": "English Academy",
+    "nameHindi": "अंग्रेजी भाषा व व्याकरण",
+    "icon": "🇬🇧",
+    "color": "from-emerald-500 to-teal-600",
+    "badgeColor": "bg-emerald-100 text-emerald-800",
+    "description": "Alphabet, Phonics, Nouns, Verbs, Adjectives, Sentence Formation",
+    "grades": ["nursery", "class-1", "class-2", "class-3", "class-4-5"],
+    "isDefault": true,
+    "createdAt": 1740000000000
+  },
+  {
+    "id": "hindi",
+    "nameEnglish": "Hindi Academy",
+    "nameHindi": "हिंदी व्याकरण व भाषा",
+    "icon": "🇮🇳",
+    "color": "from-orange-500 to-amber-600",
+    "badgeColor": "bg-orange-100 text-orange-800",
+    "description": "स्वर, व्यंजन, बारहखड़ी, संज्ञा, सर्वनाम, विलोम, पर्यायवाची, शुद्ध वर्तनी",
+    "grades": ["nursery", "class-1", "class-2", "class-3", "class-4-5"],
+    "isDefault": true,
+    "createdAt": 1740000000000
+  }
+]
+

@@ -8,12 +8,14 @@
   --font-fredoka: 'Fredoka', 'Quicksand', 'Inter', sans-serif;
 }
 
+html,
 body {
   font-family: var(--font-inter);
   background-color: #FFFDF7;
   color: #1F2937;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 

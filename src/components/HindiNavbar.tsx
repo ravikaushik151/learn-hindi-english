@@ -30,9 +30,8 @@ interface NavbarProps {
 export function HindiNavbar({ onOpenSettings }: NavbarProps) {
   const pathname = usePathname();
   const { progress } = useProgress();
-  const { activeProfile, openReportModal, openEditModal } = useChildProfile();
+  const { activeProfile, openReportModal, openEditModal, totalStars } = useChildProfile();
   const { lang, setLang, isEnglish, isHindi, t } = useLanguage();
-  const totalStars = (activeProfile.englishStars || 0) + (activeProfile.hindiStars || 0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

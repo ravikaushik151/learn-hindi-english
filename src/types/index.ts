@@ -258,6 +258,8 @@ export interface FocusWordItem {
   lastAttemptAt: number;
 }
 
+export type SubjectType = 'english' | 'hindi' | 'maths' | 'science' | 'gk';
+
 export interface ChildProfile {
   id: string;
   name: string;
@@ -267,6 +269,9 @@ export interface ChildProfile {
   createdAt: number;
   englishStars: number;
   hindiStars: number;
+  mathsStars?: number;
+  scienceStars?: number;
+  gkStars?: number;
   streakDays: number;
   lastActiveDate: string;
   completedLessons: string[];

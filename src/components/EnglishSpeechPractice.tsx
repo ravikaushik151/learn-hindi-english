@@ -107,9 +107,11 @@ const PRACTICE_ITEMS: SpeechPracticeItem[] = [
 
 export function EnglishSpeechPractice({ onBack }: { onBack?: () => void }) {
   const { speakEnglish, isSpeaking } = useSpeech();
-  const { activeProfile, recordActivity } = useChildProfile();
+  const { activeProfile, recordActivity, isLoggedIn } = useChildProfile();
   const { isEnglish, isHindi, t, shouldShowHindi } = useLanguage();
   const showHindi = shouldShowHindi();
+
+  const kidName = isLoggedIn ? activeProfile.name : (isHindi ? 'नन्हा छात्र' : 'Young Explorer');
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [evaluation, setEvaluation] = useState<{
@@ -214,7 +216,7 @@ export function EnglishSpeechPractice({ onBack }: { onBack?: () => void }) {
         </div>
 
         <div className="text-xs font-black text-amber-700">
-          {t(`${activeProfile.name}'s Practice ⭐`, `${activeProfile.name} की प्रैक्टिस ⭐`)}
+          {t(`${kidName}'s Practice ⭐`, `${kidName} की प्रैक्टिस ⭐`)}
         </div>
       </div>
 

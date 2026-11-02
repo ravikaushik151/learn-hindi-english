@@ -37,7 +37,9 @@ interface CardItem {
 
 export function RhymeMatchGame({ onBack }: { onBack?: () => void }) {
   const { speakEnglish } = useSpeech();
-  const { activeProfile, recordActivity, addStars } = useChildProfile();
+  const { activeProfile, recordActivity, addStars, isLoggedIn } = useChildProfile();
+
+  const kidName = isLoggedIn ? activeProfile.name : 'नन्हा छात्र';
 
   const [cards, setCards] = useState<CardItem[]>([]);
   const [selectedFirst, setSelectedFirst] = useState<CardItem | null>(null);
@@ -177,7 +179,7 @@ export function RhymeMatchGame({ onBack }: { onBack?: () => void }) {
         </span>
         <div className="flex items-center gap-1 text-sm font-black text-amber-600">
           <Star className="w-4 h-4 fill-amber-400 text-amber-500" />
-          <span>{activeProfile.name} • ⭐ +{matchesFound * 2}</span>
+          <span>{kidName} • ⭐ +{matchesFound * 2}</span>
         </div>
       </div>
 
@@ -224,7 +226,7 @@ export function RhymeMatchGame({ onBack }: { onBack?: () => void }) {
         <div className="p-6 bg-gradient-to-r from-emerald-400 via-teal-400 to-green-500 rounded-3xl text-white text-center space-y-3 shadow-xl animate-in zoom-in-95">
           <div className="text-5xl">🏆</div>
           <h3 className="text-2xl font-black">
-            शाबाश {activeProfile.name}! तुमने सारे तुकबंदी शब्द मिला दिए!
+            शाबाश {kidName}! तुमने सारे तुकबंदी शब्द मिला दिए!
           </h3>
           <p className="text-sm font-medium text-emerald-100 font-hindi">
             आपको मिले +{RHYME_PAIRS.length * 2} चमचमाते सितारे!

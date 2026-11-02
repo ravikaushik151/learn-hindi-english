@@ -19,6 +19,7 @@ export function ProfileManagerModal() {
     isProfileModalOpen,
     closeProfileModal,
     openReportModal,
+    isLoggedIn,
   } = useChildProfile();
   const { isEnglish, isHindi, t } = useLanguage();
 
@@ -27,6 +28,8 @@ export function ProfileManagerModal() {
   const [age, setAge] = useState<number>(6);
   const [avatar, setAvatar] = useState('🐰');
   const [grade, setGrade] = useState('Class 1');
+
+  const kidName = isLoggedIn ? activeProfile.name : (isHindi ? 'नन्हा छात्र' : 'Young Explorer');
 
   if (!isProfileModalOpen) return null;
 
@@ -90,7 +93,12 @@ export function ProfileManagerModal() {
               <div className="space-y-2.5">
                 {profiles.map((p) => {
                   const isActive = p.id === activeProfile.id;
-                  const totalStars = (p.englishStars || 0) + (p.hindiStars || 0);
+                  const totalStars =
+                    (p.englishStars || 0) +
+                    (p.hindiStars || 0) +
+                    (p.mathsStars || 0) +
+                    (p.scienceStars || 0) +
+                    (p.gkStars || 0);
 
                   return (
                     <div
@@ -165,7 +173,7 @@ export function ProfileManagerModal() {
                   className="w-full py-3 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-stone-950 font-black text-sm rounded-2xl shadow-md transition-all active:scale-98 flex items-center justify-center gap-2"
                 >
                   <span>📜</span>
-                  <span>{t(`View ${activeProfile.name}'s Report Card & Certificate`, `${activeProfile.name} का पूरा रिपोर्ट कार्ड व प्रमाण पत्र देखें`)}</span>
+                  <span>{t(`View ${kidName}'s Report Card & Certificate`, `${kidName} का पूरा रिपोर्ट कार्ड व प्रमाण पत्र देखें`)}</span>
                 </button>
               </div>
             </div>

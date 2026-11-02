@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useSpeech } from '@/hooks/useSpeech';
 import { soundEffects } from '@/lib/sounds';
 import { useChildProfile } from '@/context/ChildProfileContext';
@@ -30,10 +31,18 @@ const MASCOT_TIPS = [
 ];
 
 export function KidMascot() {
+  const pathname = usePathname();
   const { speakHindi, speakEnglish } = useSpeech();
-  const { activeProfile, openReportModal } = useChildProfile();
+  const { activeProfile, openReportModal, isLoggedIn } = useChildProfile();
   const [isOpen, setIsOpen] = useState(false);
   const [currentTipIdx, setCurrentTipIdx] = useState(0);
+
+  // Never render kid mascot on Admin portal
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
+  const kidName = isLoggedIn ? activeProfile.name : 'नन्हे दोस्त';
 
   const handleMascotClick = () => {
     soundEffects.playPop();
@@ -43,7 +52,7 @@ export function KidMascot() {
 
     const tip = MASCOT_TIPS[nextIdx];
     // Speak friendly Hindi encouragement
-    speakHindi(`${activeProfile.name}! ${tip.hindi}`);
+    speakHindi(`${kidName}! ${tip.hindi}`);
   };
 
   return (
@@ -65,7 +74,7 @@ export function KidMascot() {
                 मित्रू तोता (Mitroo) says:
               </span>
               <p className="text-xs font-bold text-stone-800 font-hindi leading-relaxed">
-                {activeProfile.name}! {MASCOT_TIPS[currentTipIdx].hindi}
+                {kidName}! {MASCOT_TIPS[currentTipIdx].hindi}
               </p>
               <p className="text-[11px] font-medium text-stone-500 italic">
                 &quot;{MASCOT_TIPS[currentTipIdx].english}&quot;

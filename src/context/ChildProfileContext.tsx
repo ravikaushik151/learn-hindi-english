@@ -1,14 +1,16 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import { ChildProfile, PracticeHistoryRecord, FocusWordItem } from '@/types';
 import { soundEffects } from '@/lib/sounds';
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 interface ChildProfileContextType {
   profiles: ChildProfile[];
   activeProfile: ChildProfile;
   switchProfile: (profileId: string) => void;
-  createProfile: (name: string, age: number, avatar: string, grade: string) => ChildProfile;
+  createProfile: (name: string, age: number, avatar: string, grade: string, pin?: string) => ChildProfile;
   updateActiveProfile: (updates: Partial<ChildProfile>) => void;
   updateProfile: (profileId: string, updates: Partial<ChildProfile>) => void;
   deleteProfile: (profileId: string) => void;
@@ -22,7 +24,9 @@ interface ChildProfileContextType {
     userSpoken?: string;
     attempts: number;
   }) => void;
-  addStars: (count: number, language: 'english' | 'hindi') => void;
+  addStars: (count: number, subject?: 'english' | 'hindi' | 'maths' | 'science' | 'gk') => void;
+  getSubjectStars: (subject: 'english' | 'hindi' | 'maths' | 'science' | 'gk') => number;
+  totalStars: number;
   markLessonCompleted: (lessonId: string, starsEarned?: number) => void;
   markWordMastered: (word: string, language: 'english' | 'hindi') => void;
   recordMistake: (word: string, meaningHindi: string, language: 'english' | 'hindi') => void;
@@ -47,6 +51,9 @@ interface ChildProfileContextType {
   openDeviceLoginModal: () => void;
   closeDeviceLoginModal: () => void;
   loginWithKidCodeOrPin: (identifier: string, pin?: string) => Promise<{ success: boolean; error?: string; message?: string; profile?: ChildProfile }>;
+  isLoggedIn: boolean;
+  logout: () => void;
+  isLoaded: boolean;
 }
 
 const STORAGE_KEY_PROFILES = 'kids_learning_profiles_v2';
@@ -78,16 +85,57 @@ async function syncProfileToServer(profile: ChildProfile) {
   }
 }
 
-// Clean initial default profile (zero fake history)
+export function isGuestProfileName(name?: string): boolean {
+  if (!name) return true;
+  const clean = name.trim().toLowerCase();
+  return (
+    clean === 'young explorer' ||
+    clean === 'little explorer' ||
+    clean === 'नन्हा छात्र' ||
+    clean.includes('my child') ||
+    clean.includes('नन्हा छात्र')
+  );
+}
+
+// Generate clean initial profile with unique id
+function createInitialProfile(): ChildProfile {
+  const rand = Math.floor(1000 + Math.random() * 9000);
+  return {
+    id: 'guest-profile-default',
+    name: 'Young Explorer',
+    age: 6,
+    avatar: '🦁',
+    grade: 'Class 1',
+    createdAt: Date.now(),
+    englishStars: 0,
+    hindiStars: 0,
+    mathsStars: 0,
+    scienceStars: 0,
+    gkStars: 0,
+    streakDays: 1,
+    lastActiveDate: getTodayString(),
+    completedLessons: [],
+    masteredWords: [],
+    practiceHistory: [],
+    focusWords: [],
+    badges: ['badge-starter'],
+    kidCode: `KID-${rand}`,
+    pin: '1234',
+  };
+}
+
 const DEFAULT_CLEAN_PROFILE: ChildProfile = {
-  id: 'child-default-1',
-  name: 'नन्हा छात्र (My Child)',
+  id: 'guest-profile-default',
+  name: 'Young Explorer',
   age: 6,
   avatar: '🦁',
   grade: 'Class 1',
-  createdAt: Date.now(),
+  createdAt: 1793600000000,
   englishStars: 0,
   hindiStars: 0,
+  mathsStars: 0,
+  scienceStars: 0,
+  gkStars: 0,
   streakDays: 1,
   lastActiveDate: getTodayString(),
   completedLessons: [],
@@ -99,11 +147,34 @@ const DEFAULT_CLEAN_PROFILE: ChildProfile = {
   pin: '1234',
 };
 
+function getSavedProfiles(): ChildProfile[] {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_PROFILES);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+  }
+  return [DEFAULT_CLEAN_PROFILE];
+}
+
+function getSavedActiveId(): string {
+  if (typeof window !== 'undefined') {
+    try {
+      const savedId = localStorage.getItem(STORAGE_KEY_ACTIVE_ID);
+      if (savedId) return savedId;
+    } catch (e) {}
+  }
+  return DEFAULT_CLEAN_PROFILE.id;
+}
+
 const ChildProfileContext = createContext<ChildProfileContextType | undefined>(undefined);
 
 export function ChildProfileProvider({ children }: { children: React.ReactNode }) {
-  const [profiles, setProfiles] = useState<ChildProfile[]>([DEFAULT_CLEAN_PROFILE]);
-  const [activeProfileId, setActiveProfileId] = useState<string>(DEFAULT_CLEAN_PROFILE.id);
+  const [profiles, setProfiles] = useState<ChildProfile[]>(getSavedProfiles);
+  const [activeProfileId, setActiveProfileId] = useState<string>(getSavedActiveId);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   // Modals
@@ -113,28 +184,95 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isDeviceLoginModalOpen, setIsDeviceLoginModalOpen] = useState(false);
 
-  // Load from LocalStorage
-  useEffect(() => {
+  // Load from LocalStorage synchronously before paint
+  useIsomorphicLayoutEffect(() => {
     try {
       const savedProfiles = localStorage.getItem(STORAGE_KEY_PROFILES);
       const savedActiveId = localStorage.getItem(STORAGE_KEY_ACTIVE_ID);
       const isSetupDone = localStorage.getItem(STORAGE_KEY_SETUP_DONE);
+      const legacyStars = localStorage.getItem('english_kids_stars');
+      const legacyLessons = localStorage.getItem('english_kids_completed_lessons');
 
       if (savedProfiles) {
         const parsed = JSON.parse(savedProfiles) as ChildProfile[];
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const normalized = parsed.map((p) => ({
-            ...p,
-            kidCode: p.kidCode || generateKidCode(p.name),
-            pin: p.pin || '1234',
-          }));
-          setProfiles(normalized);
-          if (savedActiveId && normalized.some((p) => p.id === savedActiveId)) {
-            setActiveProfileId(savedActiveId);
-          } else {
-            setActiveProfileId(normalized[0].id);
+          const normalized = parsed.map((p) => {
+            const isGuest = isGuestProfileName(p.name) || (p.id && p.id.startsWith('guest-'));
+            let cleanId = p.id;
+            if (isGuest) {
+              cleanId = 'guest-profile-default';
+            } else if (p.id === 'child-default-1') {
+              cleanId = p.kidCode ? `child-${p.kidCode.toLowerCase()}` : `child-${Date.now()}`;
+            }
+
+            return {
+              ...p,
+              id: cleanId,
+              name: isGuest ? 'Young Explorer' : p.name,
+              kidCode: p.kidCode || generateKidCode(p.name),
+              pin: p.pin || '1234',
+            };
+          });
+
+          // Restore legacy earned stars if profile stars are 0
+          if (legacyStars) {
+            const parsedStars = parseInt(legacyStars, 10);
+            if (!isNaN(parsedStars) && parsedStars > 0) {
+              normalized.forEach((p) => {
+                if ((p.englishStars || 0) === 0) {
+                  p.englishStars = parsedStars;
+                }
+              });
+            }
           }
-          syncProfileToServer(normalized[0]);
+          if (legacyLessons) {
+            try {
+              const parsedLessons = JSON.parse(legacyLessons);
+              if (Array.isArray(parsedLessons) && parsedLessons.length > 0) {
+                normalized.forEach((p) => {
+                  if ((p.completedLessons || []).length === 0) {
+                    p.completedLessons = parsedLessons;
+                  }
+                });
+              }
+            } catch (e) {}
+          }
+
+          setProfiles(normalized);
+          const targetId = savedActiveId && normalized.some((p) => p.id === savedActiveId)
+            ? savedActiveId
+            : normalized[0].id;
+          setActiveProfileId(targetId);
+
+          // Fetch latest stats from server DB ONLY for logged-in kids (never for guests)
+          const current = normalized.find((p) => p.id === targetId) || normalized[0];
+          if (current && current.name && !isGuestProfileName(current.name) && !current.id.startsWith('guest-')) {
+            const query = current.kidCode
+              ? `kidCode=${encodeURIComponent(current.kidCode)}&pin=${encodeURIComponent(current.pin || '1234')}`
+              : `name=${encodeURIComponent(current.name)}&pin=${encodeURIComponent(current.pin || '1234')}`;
+            fetch(`/api/profiles?${query}`)
+              .then((r) => r.json())
+              .then((data) => {
+                if (data.success && data.profile) {
+                  setProfiles((prev) =>
+                    prev.map((p) =>
+                      p.id === data.profile.id || (p.kidCode && p.kidCode === data.profile.kidCode)
+                        ? {
+                            ...p,
+                            ...data.profile,
+                            englishStars: Math.max(p.englishStars || 0, data.profile.englishStars || 0),
+                            hindiStars: Math.max(p.hindiStars || 0, data.profile.hindiStars || 0),
+                            mathsStars: Math.max(p.mathsStars || 0, data.profile.mathsStars || 0),
+                            scienceStars: Math.max(p.scienceStars || 0, data.profile.scienceStars || 0),
+                            gkStars: Math.max(p.gkStars || 0, data.profile.gkStars || 0),
+                          }
+                        : p
+                    )
+                  );
+                }
+              })
+              .catch(() => {});
+          }
         }
       } else if (!isSetupDone) {
         // First-time visitor: prompt with Welcome Setup Modal!
@@ -147,6 +285,9 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
     }
   }, []);
 
+  // Current active profile
+  const activeProfile = profiles.find((p) => p.id === activeProfileId) || profiles[0] || DEFAULT_CLEAN_PROFILE;
+
   // Save to LocalStorage whenever profiles or active id change
   useEffect(() => {
     if (!isLoaded) return;
@@ -156,10 +297,15 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
     } catch (e) {
       console.warn('Failed to save child profiles:', e);
     }
-  }, [profiles, activeProfileId, isLoaded]);
 
-  // Current active profile
-  const activeProfile = profiles.find((p) => p.id === activeProfileId) || profiles[0] || DEFAULT_CLEAN_PROFILE;
+    // Auto-sync active profile to server DB in background
+    if (activeProfile && activeProfile.name && !isGuestProfileName(activeProfile.name)) {
+      const timer = setTimeout(() => {
+        syncProfileToServer(activeProfile);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [profiles, activeProfileId, isLoaded, activeProfile]);
 
   // Streak update on daily visit
   useEffect(() => {
@@ -186,6 +332,46 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
       );
     }
   }, [activeProfile, isLoaded]);
+
+  // Real-time cross-browser / multi-window sync when tab or window is focused
+  useEffect(() => {
+    if (!isLoaded || !activeProfile || isGuestProfileName(activeProfile.name) || activeProfile.id.startsWith('guest-')) {
+      return;
+    }
+
+    const syncOnFocus = () => {
+      const query = activeProfile.kidCode
+        ? `kidCode=${encodeURIComponent(activeProfile.kidCode)}&pin=${encodeURIComponent(activeProfile.pin || '1234')}`
+        : `name=${encodeURIComponent(activeProfile.name)}&pin=${encodeURIComponent(activeProfile.pin || '1234')}`;
+
+      fetch(`/api/profiles?${query}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success && data.profile) {
+            setProfiles((prev) =>
+              prev.map((p) => {
+                if (p.id === data.profile.id || (p.kidCode && p.kidCode === data.profile.kidCode)) {
+                  return {
+                    ...p,
+                    ...data.profile,
+                    englishStars: Math.max(p.englishStars || 0, data.profile.englishStars || 0),
+                    hindiStars: Math.max(p.hindiStars || 0, data.profile.hindiStars || 0),
+                    mathsStars: Math.max(p.mathsStars || 0, data.profile.mathsStars || 0),
+                    scienceStars: Math.max(p.scienceStars || 0, data.profile.scienceStars || 0),
+                    gkStars: Math.max(p.gkStars || 0, data.profile.gkStars || 0),
+                  };
+                }
+                return p;
+              })
+            );
+          }
+        })
+        .catch(() => {});
+    };
+
+    window.addEventListener('focus', syncOnFocus);
+    return () => window.removeEventListener('focus', syncOnFocus);
+  }, [activeProfile?.id, activeProfile?.kidCode, activeProfile?.pin, isLoaded]);
 
   const switchProfile = useCallback((profileId: string) => {
     if (profiles.some((p) => p.id === profileId)) {
@@ -215,7 +401,7 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
     soundEffects.playSuccess();
   }, [activeProfileId]);
 
-  const createProfile = useCallback((name: string, age: number, avatar: string, grade: string): ChildProfile => {
+  const createProfile = useCallback((name: string, age: number, avatar: string, grade: string, pin?: string): ChildProfile => {
     const finalName = name.trim() || 'नया छात्र';
     const newProfile: ChildProfile = {
       id: `child-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
@@ -234,7 +420,7 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
       focusWords: [],
       badges: ['badge-starter'],
       kidCode: generateKidCode(finalName),
-      pin: '1234',
+      pin: pin ? pin.trim() || '1234' : '1234',
     };
 
     setProfiles((prev) => [...prev, newProfile]);
@@ -271,14 +457,24 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
           const existingIdx = prev.findIndex(
             (p) => p.id === fetchedProfile.id || (p.kidCode && p.kidCode === fetchedProfile.kidCode)
           );
+          let nextProfiles: ChildProfile[];
           if (existingIdx >= 0) {
-            return prev.map((p, idx) => (idx === existingIdx ? fetchedProfile : p));
+            nextProfiles = prev.map((p, idx) => (idx === existingIdx ? fetchedProfile : p));
+          } else {
+            const nonGuests = prev.filter((p) => !isGuestProfileName(p.name) && !p.id.startsWith('guest-'));
+            nextProfiles = [...nonGuests, fetchedProfile];
           }
-          return [...prev, fetchedProfile];
+          try {
+            localStorage.setItem(STORAGE_KEY_PROFILES, JSON.stringify(nextProfiles));
+            localStorage.setItem(STORAGE_KEY_ACTIVE_ID, fetchedProfile.id);
+            localStorage.setItem(STORAGE_KEY_SETUP_DONE, 'true');
+          } catch (e) {}
+          return nextProfiles;
         });
 
         setActiveProfileId(fetchedProfile.id);
         try {
+          localStorage.setItem(STORAGE_KEY_ACTIVE_ID, fetchedProfile.id);
           localStorage.setItem(STORAGE_KEY_SETUP_DONE, 'true');
         } catch (e) {}
         return {
@@ -313,19 +509,79 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
     });
   }, [profiles]);
 
-  const addStars = useCallback((count: number, language: 'english' | 'hindi') => {
-    if (count <= 0) return;
-    setProfiles((prev) =>
-      prev.map((p) => {
-        if (p.id !== activeProfileId) return p;
-        if (language === 'english') {
-          return { ...p, englishStars: (p.englishStars || 0) + count };
-        } else {
-          return { ...p, hindiStars: (p.hindiStars || 0) + count };
-        }
-      })
-    );
-  }, [activeProfileId]);
+  const logout = useCallback(() => {
+    soundEffects.playPop();
+    const guestProfile = createInitialProfile();
+    setProfiles([guestProfile]);
+    setActiveProfileId(guestProfile.id);
+    try {
+      localStorage.setItem(STORAGE_KEY_PROFILES, JSON.stringify([guestProfile]));
+      localStorage.setItem(STORAGE_KEY_ACTIVE_ID, guestProfile.id);
+      localStorage.removeItem(STORAGE_KEY_SETUP_DONE);
+    } catch (e) {}
+  }, []);
+
+  const isLoggedIn = Boolean(
+    activeProfile &&
+    activeProfile.name &&
+    !isGuestProfileName(activeProfile.name) &&
+    !activeProfile.id.startsWith('guest-')
+  );
+
+  const addStars = useCallback(
+    (count: number, subject: 'english' | 'hindi' | 'maths' | 'science' | 'gk' = 'english') => {
+      if (count <= 0) return;
+      setProfiles((prev) =>
+        prev.map((p) => {
+          if (p.id !== activeProfileId) return p;
+          const updated = { ...p };
+          if (subject === 'science') {
+            updated.scienceStars = (p.scienceStars || 0) + count;
+          } else if (subject === 'gk') {
+            updated.gkStars = (p.gkStars || 0) + count;
+          } else if (subject === 'maths') {
+            updated.mathsStars = (p.mathsStars || 0) + count;
+          } else if (subject === 'hindi') {
+            updated.hindiStars = (p.hindiStars || 0) + count;
+          } else {
+            updated.englishStars = (p.englishStars || 0) + count;
+          }
+          if (!isGuestProfileName(updated.name) && !updated.id.startsWith('guest-')) {
+            syncProfileToServer(updated);
+          }
+          return updated;
+        })
+      );
+    },
+    [activeProfileId]
+  );
+
+  const getSubjectStars = useCallback(
+    (subject: 'english' | 'hindi' | 'maths' | 'science' | 'gk'): number => {
+      if (!activeProfile) return 0;
+      switch (subject) {
+        case 'science':
+          return activeProfile.scienceStars || 0;
+        case 'gk':
+          return activeProfile.gkStars || 0;
+        case 'maths':
+          return activeProfile.mathsStars || 0;
+        case 'hindi':
+          return activeProfile.hindiStars || 0;
+        case 'english':
+        default:
+          return activeProfile.englishStars || 0;
+      }
+    },
+    [activeProfile]
+  );
+
+  const totalStars =
+    (activeProfile.englishStars || 0) +
+    (activeProfile.hindiStars || 0) +
+    (activeProfile.mathsStars || 0) +
+    (activeProfile.scienceStars || 0) +
+    (activeProfile.gkStars || 0);
 
   const markLessonCompleted = useCallback((lessonId: string, starsEarned: number = 5) => {
     setProfiles((prev) =>
@@ -336,11 +592,15 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
           ? p.completedLessons
           : [...p.completedLessons, lessonId];
         const starsToAdd = alreadyCompleted ? 1 : starsEarned;
-        return {
+        const updated = {
           ...p,
           completedLessons: updatedCompleted,
           englishStars: (p.englishStars || 0) + starsToAdd,
         };
+        if (!isGuestProfileName(updated.name) && !updated.id.startsWith('guest-')) {
+          syncProfileToServer(updated);
+        }
+        return updated;
       })
     );
   }, [activeProfileId]);
@@ -501,6 +761,8 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
         deleteProfile,
         recordActivity,
         addStars,
+        getSubjectStars,
+        totalStars,
         markLessonCompleted,
         markWordMastered,
         recordMistake,
@@ -510,8 +772,8 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
         isEditModalOpen,
         openEditModal: () => setIsEditModalOpen(true),
         closeEditModal: () => setIsEditModalOpen(false),
-        isProfileModalOpen,
-        openProfileModal: () => setIsProfileModalOpen(true),
+        isProfileModalOpen: false,
+        openProfileModal: () => setIsDeviceLoginModalOpen(true),
         closeProfileModal: () => setIsProfileModalOpen(false),
         isWelcomeModalOpen,
         closeWelcomeModal: () => setIsWelcomeModalOpen(false),
@@ -519,6 +781,9 @@ export function ChildProfileProvider({ children }: { children: React.ReactNode }
         openDeviceLoginModal: () => setIsDeviceLoginModalOpen(true),
         closeDeviceLoginModal: () => setIsDeviceLoginModalOpen(false),
         loginWithKidCodeOrPin,
+        isLoggedIn,
+        logout,
+        isLoaded,
       }}
     >
       {children}

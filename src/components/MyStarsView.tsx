@@ -4,6 +4,7 @@ import React from 'react';
 import { soundEffects } from '@/lib/sounds';
 import { ENGLISH_BADGES } from '@/hooks/useEnglishProgress';
 import { useLanguage } from '@/context/LanguageContext';
+import { useChildProfile } from '@/context/ChildProfileContext';
 import { Star, Trophy, Award, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
 interface MyStarsViewProps {
@@ -22,6 +23,7 @@ export function MyStarsView({
   onPlayGames,
 }: MyStarsViewProps) {
   const { shouldShowHindi, t } = useLanguage();
+  const { getSubjectStars } = useChildProfile();
   const showHindi = shouldShowHindi();
 
   const progressPercent = Math.min(
@@ -103,7 +105,36 @@ export function MyStarsView({
         </div>
       </div>
 
-      {/* 3. Badges Showcase */}
+      {/* 3. Subject-Wise Stars Breakdown */}
+      <div className="bg-white rounded-3xl border-3 border-amber-200 p-5 sm:p-6 shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg sm:text-xl font-black text-stone-900 flex items-center gap-2">
+            <span>⭐</span>
+            <span>{t('Stars Earned by Subject', 'विषय अनुसार अर्जित सितारे')}</span>
+          </h3>
+          <span className="text-xs font-bold text-amber-900 bg-amber-100 px-3 py-1 rounded-full">
+            {t('5 Core Subjects', '५ मुख्य विषय')}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          {[
+            { id: 'science', name: t('Science', 'विज्ञान'), icon: '🔬', stars: getSubjectStars('science'), color: 'bg-purple-50 border-purple-200 text-purple-700' },
+            { id: 'gk', name: 'GK', icon: '🌍', stars: getSubjectStars('gk'), color: 'bg-teal-50 border-teal-200 text-teal-700' },
+            { id: 'maths', name: t('Maths', 'गणित'), icon: '🔢', stars: getSubjectStars('maths'), color: 'bg-blue-50 border-blue-200 text-blue-700' },
+            { id: 'english', name: t('English', 'अंग्रेजी'), icon: '🇬🇧', stars: getSubjectStars('english'), color: 'bg-emerald-50 border-emerald-200 text-emerald-700' },
+            { id: 'hindi', name: t('Hindi', 'हिंदी'), icon: '🇮🇳', stars: getSubjectStars('hindi'), color: 'bg-orange-50 border-orange-200 text-orange-700' },
+          ].map((subj) => (
+            <div key={subj.id} className={`p-3.5 rounded-2xl border-2 ${subj.color} text-center shadow-2xs`}>
+              <span className="text-2xl block">{subj.icon}</span>
+              <div className="text-lg sm:text-xl font-black text-stone-900 mt-1">⭐ {subj.stars}</div>
+              <div className="text-[11px] font-black uppercase tracking-wider opacity-80 mt-0.5">{subj.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. Badges Showcase */}
       <div className="bg-white rounded-3xl border-3 border-amber-200 p-6 sm:p-8 shadow-md space-y-4">
         <div className="flex items-center justify-between">
           <div>

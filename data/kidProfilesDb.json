@@ -1,24 +1,94 @@
 [
   {
-    "id": "child-default-1",
+    "id": "child-jeevika-1",
+    "name": "Jeevika",
+    "age": 8,
+    "avatar": "🦁",
+    "grade": "Class 3",
+    "createdAt": 1793599524840,
+    "englishStars": 64,
+    "hindiStars": 40,
+    "mathsStars": 20,
+    "scienceStars": 14,
+    "gkStars": 10,
+    "streakDays": 2,
+    "lastActiveDate": "2026-11-02",
+    "completedLessons": [
+      "lesson-alphabet-vowels",
+      "lesson-first-words",
+      "lesson-nouns"
+    ],
+    "masteredWords": [
+      "Butterfly",
+      "School",
+      "किताब",
+      "गुलाब",
+      "Good Morning!"
+    ],
+    "practiceHistory": [
+      {
+        "id": "act-1793634155627-g9qj",
+        "word": "Good Morning!",
+        "meaningHindi": "शुभ प्रभात! (सुबह का अभिवादन)",
+        "language": "english",
+        "activityType": "speech",
+        "score": 100,
+        "isCorrect": true,
+        "timestamp": 1793634155627,
+        "userSpoken": "good morning",
+        "attempts": 1
+      }
+    ],
+    "focusWords": [],
+    "badges": [
+      "badge-starter",
+      "badge-phonics"
+    ],
+    "kidCode": "JEEV-9280",
+    "pin": "1234",
+    "stars": 148
+  },
+  {
+    "id": "child-jeevika-class1",
     "name": "Jeevika",
     "age": 9,
     "avatar": "🦋",
     "grade": "Class 1",
-    "createdAt": 1793602344707,
-    "englishStars": 0,
-    "hindiStars": 9,
+    "createdAt": 1793601000000,
+    "englishStars": 20,
+    "hindiStars": 15,
+    "mathsStars": 15,
+    "scienceStars": 6,
+    "gkStars": 6,
     "streakDays": 1,
     "lastActiveDate": "2026-11-02",
-    "completedLessons": [],
-    "masteredWords": [],
+    "completedLessons": [
+      "lesson-alphabet-vowels",
+      "lesson-first-words",
+      "lesson-nouns",
+      "lesson-verbs",
+      "lesson-adjectives",
+      "lesson-pronouns",
+      "lesson-prepositions",
+      "lesson-conjunctions"
+    ],
+    "masteredWords": [
+      "Apple",
+      "Cat",
+      "Dog",
+      "Sun",
+      "कमल",
+      "घर",
+      "जल"
+    ],
     "practiceHistory": [],
     "focusWords": [],
     "badges": [
-      "badge-starter"
+      "badge-starter",
+      "badge-phonics"
     ],
     "kidCode": "JEEV-5533",
-    "pin": "1234"
+    "pin": "5533"
   },
   {
     "id": "child-rai-1",
@@ -26,20 +96,30 @@
     "age": 6,
     "avatar": "🦁",
     "grade": "Class 1",
-    "englishStars": 30,
+    "createdAt": 1793602000000,
+    "englishStars": 20,
     "hindiStars": 15,
-    "kidCode": "RAI-5678",
-    "pin": "4321",
+    "mathsStars": 15,
+    "scienceStars": 8,
+    "gkStars": 7,
+    "streakDays": 2,
+    "lastActiveDate": "2026-11-02",
     "completedLessons": [
-      "lesson-1"
+      "lesson-alphabet-vowels",
+      "lesson-first-words"
     ],
     "masteredWords": [
-      "Apple"
+      "Apple",
+      "कमल",
+      "अनार"
     ],
     "practiceHistory": [],
     "focusWords": [],
     "badges": [
-      "badge-starter"
-    ]
+      "badge-starter",
+      "badge-phonics"
+    ],
+    "kidCode": "RAI-5678",
+    "pin": "1234"
   }
 ]

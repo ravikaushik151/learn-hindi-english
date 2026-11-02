@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useChildProfile } from '@/context/ChildProfileContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { soundEffects } from '@/lib/sounds';
-import { KeyRound, ShieldCheck, ArrowRight, UserCheck, AlertCircle, Sparkles, X } from 'lucide-react';
+import { KeyRound, ShieldCheck, ArrowRight, UserCheck, AlertCircle, Sparkles, X, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export function DeviceLoginModal() {
@@ -12,10 +12,8 @@ export function DeviceLoginModal() {
     isDeviceLoginModalOpen,
     closeDeviceLoginModal,
     loginWithKidCodeOrPin,
-    openEditModal,
-    activeProfile,
   } = useChildProfile();
-  const { t, isEnglish } = useLanguage();
+  const { t } = useLanguage();
 
   const [loginMethod, setLoginMethod] = useState<'namePin' | 'kidCode'>('namePin');
   const [name, setName] = useState('');
@@ -24,6 +22,13 @@ export function DeviceLoginModal() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isDeviceLoginModalOpen) {
+      setErrorMessage(null);
+      setSuccessMessage(null);
+    }
+  }, [isDeviceLoginModalOpen]);
 
   if (!isDeviceLoginModalOpen) return null;
 
@@ -35,16 +40,10 @@ export function DeviceLoginModal() {
 
     try {
       const identifier = loginMethod === 'namePin' ? name.trim() : kidCode.trim();
-      const pinValue = loginMethod === 'namePin' ? pin.trim() : pin.trim();
+      const pinValue = pin.trim() || '1234'; // Default to 1234 if left blank
 
       if (!identifier) {
         setErrorMessage(t('Please enter your name or Kid Code.', 'कृपया अपना नाम या किड कोड दर्ज करें।'));
-        setIsLoading(false);
-        return;
-      }
-
-      if (loginMethod === 'namePin' && (!pinValue || pinValue.length < 4)) {
-        setErrorMessage(t('Please enter your 4-digit PIN.', 'कृपया अपना 4-अंकों का गुप्त पिन दर्ज करें।'));
         setIsLoading(false);
         return;
       }
@@ -54,8 +53,18 @@ export function DeviceLoginModal() {
       if (result.success) {
         soundEffects.playCelebration();
         confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        const totalRestoredStars =
+          (result.profile?.englishStars || 0) +
+          (result.profile?.hindiStars || 0) +
+          (result.profile?.mathsStars || 0) +
+          (result.profile?.scienceStars || 0) +
+          (result.profile?.gkStars || 0);
+
         setSuccessMessage(
-          t('🎉 Profile restored successfully! All your stars and badges are loaded.', '🎉 आपका प्रोफ़ाइल सफलतापूर्वक लोड हो गया है! आपके सभी सितारे सुरक्षित हैं।')
+          t(
+            `🎉 Welcome, ${result.profile?.name || identifier}! Profile restored with ${totalRestoredStars} ⭐ stars!`,
+            `🎉 स्वागत है, ${result.profile?.name || identifier}! प्रोफ़ाइल लोड हो गई है और सभी सितारे (${totalRestoredStars} ⭐) सुरक्षित हैं!`
+          )
         );
         setTimeout(() => {
           closeDeviceLoginModal();
@@ -63,21 +72,21 @@ export function DeviceLoginModal() {
           setName('');
           setPin('');
           setKidCode('');
-        }, 1600);
+        }, 1500);
       } else {
         soundEffects.playTryAgain();
         if (result.error === 'INCORRECT_PIN') {
           setErrorMessage(
             t(
-              `⚠️ Incorrect PIN! Profile for "${identifier}" is protected. Only the real ${identifier} with the correct 4-digit PIN can open it.`,
-              `⚠️ गलत पिन! "${identifier}" का प्रोफ़ाइल पिन से सुरक्षित है। केवल सही 4-अंकों वाले पिन से ही इसे खोला जा सकता है।`
+              `⚠️ Incorrect PIN! Profile for "${identifier}" is protected. (If you didn't set a custom PIN, the default is 1234).`,
+              `⚠️ गलत पिन! "${identifier}" का प्रोफ़ाइल पिन से सुरक्षित है। (यदि आपने पिन नहीं बदला था, तो डिफ़ॉल्ट 1234 है)।`
             )
           );
         } else {
           setErrorMessage(
             t(
-              `No profile found for "${identifier}". Please check the spelling or enter your Unique Kid Code.`,
-              `"${identifier}" का कोई प्रोफ़ाइल नहीं मिला। कृपया नाम या किड कोड की स्पेलिंग जांचें।`
+              `No profile found for "${identifier}". Please check spelling or enter your Unique Kid Code (e.g. RAI-5678).`,
+              `"${identifier}" नाम का कोई प्रोफ़ाइल नहीं मिला। कृपया स्पेलिंग जांचें या अपना किड कोड दर्ज करें।`
             )
           );
         }
@@ -91,7 +100,7 @@ export function DeviceLoginModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border-4 border-amber-300 overflow-hidden flex flex-col relative text-left">
+      <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border-4 border-amber-300 overflow-hidden flex flex-col relative text-left max-h-[92vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={() => {
@@ -121,24 +130,6 @@ export function DeviceLoginModal() {
             )}
           </p>
         </div>
-
-        {/* Active Child Reference Card */}
-        {activeProfile?.kidCode && (
-          <div className="mx-6 mt-4 p-3 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">{activeProfile.avatar}</span>
-              <div>
-                <span className="font-bold text-stone-900 block">{activeProfile.name}</span>
-                <span className="text-stone-500 font-mono text-[11px]">
-                  Passport Code: <strong className="text-amber-900 font-black">{activeProfile.kidCode}</strong>
-                </span>
-              </div>
-            </div>
-            <span className="px-2 py-0.5 bg-amber-200 text-amber-950 font-black rounded-lg text-[10px]">
-              Active On This Device
-            </span>
-          </div>
-        )}
 
         {/* Tabs to choose login style */}
         <div className="px-6 pt-4">
@@ -189,7 +180,7 @@ export function DeviceLoginModal() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder={t('e.g. Rai, Ravi, Aarav...', 'जैसे: Rai, Ravi, आरव...')}
+                  placeholder={t('e.g. Rai, Ravi, Jeevika...', 'जैसे: Rai, Ravi, Jeevika...')}
                   className="w-full px-4 py-2.5 rounded-2xl border-2 border-stone-300 focus:border-amber-400 text-base font-bold text-stone-900 outline-none transition-all shadow-inner"
                 />
               </div>
@@ -207,12 +198,17 @@ export function DeviceLoginModal() {
                   type="password"
                   inputMode="numeric"
                   maxLength={6}
-                  required
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
-                  placeholder="••••"
+                  placeholder="1234"
                   className="w-full px-4 py-2.5 rounded-2xl border-2 border-stone-300 focus:border-amber-400 text-xl font-mono tracking-widest text-stone-900 outline-none transition-all shadow-inner text-center"
                 />
+                <p className="text-[10px] text-stone-500 mt-1">
+                  {t(
+                    '💡 If you did not change your PIN, leave blank or type 1234.',
+                    '💡 यदि आपने पिन नहीं बदला था, तो खाली छोड़ें या 1234 लिखें।'
+                  )}
+                </p>
               </div>
             </>
           ) : (
@@ -225,7 +221,7 @@ export function DeviceLoginModal() {
                 required
                 value={kidCode}
                 onChange={(e) => setKidCode(e.target.value.toUpperCase())}
-                placeholder="e.g. RAI-7429 or RAVI-3184"
+                placeholder="e.g. RAI-5678 or JEEV-5533"
                 className="w-full px-4 py-2.5 rounded-2xl border-2 border-stone-300 focus:border-amber-400 text-lg font-mono font-black text-stone-900 outline-none transition-all uppercase tracking-wider shadow-inner text-center"
               />
               <p className="text-[11px] text-stone-500 mt-1">
@@ -270,8 +266,8 @@ export function DeviceLoginModal() {
           </p>
           <p className="text-[11px]">
             {t(
-              'No one else can open or edit your learning record without your 4-digit PIN.',
-              'आपके 4-अंकों के पिन के बिना कोई दूसरा आपके नाम से आपका रिकॉर्ड नहीं देख सकता।'
+              'Users are saved in your browser and synced to server (data/kidProfilesDb.json).',
+              'प्रोफ़ाइल आपके ब्राउज़र और सर्वर (data/kidProfilesDb.json) में सुरक्षित रूप से सेव होती है।'
             )}
           </p>
         </div>
@@ -279,4 +275,3 @@ export function DeviceLoginModal() {
     </div>
   );
 }
-

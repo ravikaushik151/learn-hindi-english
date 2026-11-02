@@ -19,7 +19,6 @@ import { KidsEssentialsExplorer } from '@/components/KidsEssentialsExplorer';
 import { PlayGamesView } from '@/components/PlayGamesView';
 import { MyStarsView } from '@/components/MyStarsView';
 import { EnglishSpeechPractice } from '@/components/EnglishSpeechPractice';
-import { useEnglishProgress } from '@/hooks/useEnglishProgress';
 import { useChildProfile } from '@/context/ChildProfileContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { soundEffects } from '@/lib/sounds';
@@ -29,15 +28,30 @@ import { HindiVarnamalaExplorer } from '@/components/HindiVarnamalaExplorer';
 import { BarakhadiTable } from '@/components/BarakhadiTable';
 import { HindiShabdPathanExplorer } from '@/components/HindiShabdPathanExplorer';
 import { HindiGintiExplorer } from '@/components/HindiGintiExplorer';
+import { HindiGamesView } from '@/components/HindiGamesView';
+import { MathsExplorer } from '@/components/MathsExplorer';
+import { ClassWiseCurriculumView } from '@/components/ClassWiseCurriculumView';
+import { StudentLoginGate } from '@/components/StudentLoginGate';
 
 export default function HomePage() {
-  const { starsCount, completedLessons, completeLesson } = useEnglishProgress();
-  const { activeProfile, openReportModal, openProfileModal, openEditModal, openDeviceLoginModal, markLessonCompleted } = useChildProfile();
+  const { activeProfile, openReportModal, openProfileModal, openEditModal, openDeviceLoginModal, markLessonCompleted, addStars, totalStars, getSubjectStars, isLoggedIn, isLoaded } = useChildProfile();
   const { lang, isEnglish, isHindi, t, shouldShowHindi } = useLanguage();
 
+  const totalChildStars = totalStars;
+  const completedLessonsList = activeProfile.completedLessons || [];
+
   const [activeTab, setActiveTab] = useState<MainNavTab>('home');
+  const [selectedSubject, setSelectedSubject] = useState<'all' | 'english' | 'hindi' | 'maths' | 'science' | 'gk'>('all');
   const [activeStage, setActiveStage] = useState<StageId>('stage-1');
   const [activeLesson, setActiveLesson] = useState<GrammarLesson>(GRAMMAR_LESSONS[0]);
+  const [guestPreviewMode, setGuestPreviewMode] = useState<boolean>(false);
+
+  // When user logs out, return to student login gate
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      setGuestPreviewMode(false);
+    }
+  }, [isLoggedIn]);
 
   // Inside 'learn' tab: sub-modes to explore for English
   const [learnSubTab, setLearnSubTab] = useState<
@@ -66,7 +80,6 @@ export default function HomePage() {
     const currentIdx = GRAMMAR_LESSONS.findIndex((l) => l.id === activeLesson.id);
     
     // 1. Award stars for current lesson
-    completeLesson(activeLesson.id, 5, 5);
     markLessonCompleted(activeLesson.id, 5);
 
     // 2. Determine next lesson (advances to next, or loops back to first stage so game never gets stuck)
@@ -85,107 +98,159 @@ export default function HomePage() {
   };
 
   const handleLessonCompleted = (score: number) => {
-    completeLesson(activeLesson.id, score, 5);
     markLessonCompleted(activeLesson.id, Math.max(1, Math.round(score)));
   };
 
+  const displayName = isLoggedIn
+    ? activeProfile.name
+    : isHindi
+    ? 'नन्हा छात्र'
+    : 'Young Explorer';
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFDF7] pb-20 md:pb-8">
-      {/* 1. Simplified Kid-Friendly Navbar */}
+    <div className="min-h-screen flex flex-col bg-[#FFFDF7] pb-24 lg:pb-8">
+      {/* 1. Simplified Kid-Friendly Navbar with Subjects Dropdown (No Admin URL) */}
       <Navbar
         activeTab={activeTab}
         onTabChange={setActiveTab}
-        starsCount={starsCount}
+        starsCount={totalChildStars}
+        activeSubject={selectedSubject}
+        onSelectSubject={(subj) => {
+          setSelectedSubject(subj);
+          if (subj === 'maths') {
+            setActiveTab('maths');
+          } else {
+            setActiveTab('home');
+            setTimeout(() => {
+              const el = document.getElementById('curriculum-subjects-selector');
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+          }
+        }}
       />
 
       {/* 2. Main Content Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-6 space-y-6">
         {/* Progress Tracker Bar */}
-        <LessonProgressTracker
-          completedLessons={completedLessons}
-          totalLessons={GRAMMAR_LESSONS.length}
-          starsCount={starsCount}
-        />
+        {(isLoaded && (isLoggedIn || guestPreviewMode || activeTab !== 'home')) && (
+          <LessonProgressTracker
+            completedLessons={completedLessonsList}
+            totalLessons={GRAMMAR_LESSONS.length}
+            starsCount={totalChildStars}
+          />
+        )}
 
         {/* ========================================================
             TAB 1: HOME (DASHBOARD)
             ======================================================== */}
         {activeTab === 'home' && (
           <div className="space-y-6 animate-in fade-in">
-            {/* Sleek Kid Profile & Greeting Bar with Kid Code & Multi-Browser Sync */}
-            <div className="bg-white p-4 sm:p-5 rounded-3xl border-2 border-amber-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 flex items-center justify-center text-3xl shadow-sm shrink-0">
-                  {activeProfile.avatar}
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-base sm:text-xl font-black text-stone-900">
-                      {t(`Welcome, ${activeProfile.name}! 👋`, `नमस्ते, ${activeProfile.name}! 👋`)}
-                    </h2>
-                    
-                    {/* Unique Kid Code Passport Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-50 border border-amber-300 rounded-lg text-xs font-black text-amber-900">
-                      <span className="text-[10px] text-amber-700">🔑 {t('Code:', 'कोड:')}</span>
-                      <span className="font-mono tracking-wider text-amber-950 font-black">{activeProfile.kidCode || 'RAI-7429'}</span>
+            {/* If still hydrating or checking storage: show cheerful skeleton, NEVER flash login gate on refresh! */}
+            {!isLoaded ? (
+              <div className="space-y-6">
+                <div className="bg-white p-5 rounded-3xl border-2 border-amber-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 animate-pulse">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-14 h-14 rounded-2xl bg-amber-200/80 shrink-0" />
+                    <div className="space-y-2">
+                      <div className="h-6 w-48 bg-amber-200/70 rounded-xl" />
+                      <div className="h-4 w-64 bg-amber-100/70 rounded-lg" />
                     </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-9 w-28 bg-amber-100 rounded-xl" />
+                    <div className="h-9 w-24 bg-amber-100 rounded-xl" />
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-amber-200 via-orange-200 to-rose-200 p-8 rounded-3xl h-36 sm:h-44 animate-pulse flex items-center justify-center">
+                  <div className="flex items-center gap-2 text-amber-900 font-bold text-sm bg-white/50 px-4 py-2 rounded-2xl backdrop-blur-sm">
+                    <span className="text-xl animate-bounce">🎒</span>
+                    <span>{isHindi ? 'कक्षा लोड हो रही है...' : 'Loading classroom...'}</span>
+                  </div>
+                </div>
+              </div>
+            ) : !isLoggedIn && !guestPreviewMode ? (
+              <StudentLoginGate
+                onContinueAsGuest={() => {
+                  soundEffects.playPop();
+                  setGuestPreviewMode(true);
+                }}
+              />
+            ) : (
+              <>
+                {/* Sleek Kid Profile & Greeting Bar with Kid Code & Multi-Browser Sync */}
+                <div className="bg-white p-4 sm:p-5 rounded-3xl border-2 border-amber-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                      {activeProfile.avatar}
+                    </div>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h2 className="text-base sm:text-xl font-black text-stone-900">
+                          {isHindi ? `नमस्ते, ${displayName}! 👋` : `Welcome, ${displayName}! 👋`}
+                        </h2>
+                        
+                        {/* Unique Kid Code Passport Badge */}
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-50 border border-amber-300 rounded-lg text-xs font-black text-amber-900">
+                          <span className="text-[10px] text-amber-700">🔑 {t('Code:', 'कोड:')}</span>
+                          <span className="font-mono tracking-wider text-amber-950 font-black">{activeProfile.kidCode || 'KID-1001'}</span>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            soundEffects.playPop();
+                            openEditModal();
+                          }}
+                          className="text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-100 hover:bg-amber-200 px-2 py-0.5 rounded-lg transition-colors flex items-center gap-1"
+                          title={t('Change name, avatar, or PIN', 'नाम, अवतार या पिन बदलें')}
+                        >
+                          <span>{t('✏️ Edit', '✏️ बदलें')}</span>
+                        </button>
+                      </div>
+                      <p className="text-xs text-stone-500 font-semibold mt-1">
+                        {isHindi ? (
+                          `उम्र: ${activeProfile.age} वर्ष • ${activeProfile.grade} • 🔥 ${activeProfile.streakDays || 1} दिन स्ट्रीक • 🔒 पिन सुरक्षित`
+                        ) : (
+                          `Age: ${activeProfile.age} yrs • ${activeProfile.grade} • 🔥 ${activeProfile.streakDays || 1} Day Streak • 🔒 PIN Protected`
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 self-start md:self-center">
+                    {/* Private Switch Account (Prompt for Name & PIN, zero student leakage) */}
+                    <button
+                      onClick={() => {
+                        soundEffects.playPop();
+                        openDeviceLoginModal();
+                      }}
+                      className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-stone-950 font-black text-xs rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+                      title={isLoggedIn ? t('Switch child or open on another device with PIN', 'गुप्त पिन से दूसरा खाता खोलें') : t('Login with PIN or Kid Code', 'पिन या किड कोड से लॉगिन करें')}
+                    >
+                      <KeyRound className="w-3.5 h-3.5 text-stone-950" />
+                      <span>{isLoggedIn ? t('Switch Kid 🔄', 'दूसरा बच्चा बदलें 🔄') : t('Login with PIN 🔑', 'पिन से लॉगिन करें 🔑')}</span>
+                    </button>
 
                     <button
                       onClick={() => {
                         soundEffects.playPop();
-                        openEditModal();
+                        openReportModal();
                       }}
-                      className="text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-100 hover:bg-amber-200 px-2 py-0.5 rounded-lg transition-colors flex items-center gap-1"
-                      title={t('Change name, avatar, or PIN', 'नाम, अवतार या पिन बदलें')}
+                      className="flex items-center gap-1.5 px-3 py-2 bg-amber-100 hover:bg-amber-200 text-stone-900 font-black text-xs rounded-xl border border-amber-300 transition-all active:scale-95 cursor-pointer"
                     >
-                      <span>{t('✏️ Edit', '✏️ बदलें')}</span>
+                      <span>📜</span>
+                      <span>{t('Report Card', 'रिपोर्ट कार्ड')}</span>
                     </button>
                   </div>
-                  <p className="text-xs text-stone-500 font-semibold mt-1">
-                    {t(
-                      `Age: ${activeProfile.age} yrs • ${activeProfile.grade} • 🔥 ${activeProfile.streakDays || 1} Day Streak • 🔒 PIN Protected`,
-                      `उम्र: ${activeProfile.age} वर्ष • ${activeProfile.grade} • 🔥 ${activeProfile.streakDays || 1} दिन स्ट्रीक • 🔒 पिन सुरक्षित`
-                    )}
-                  </p>
                 </div>
-              </div>
 
-              <div className="flex flex-wrap items-center gap-2 self-start md:self-center">
-                {/* Multi-Browser / Multi-Device Sync Button */}
-                <button
-                  onClick={() => {
-                    soundEffects.playPop();
-                    openDeviceLoginModal();
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-stone-950 font-black text-xs rounded-xl shadow-xs transition-all active:scale-95"
-                  title={t('Open profile on another browser or phone', 'दूसरे ब्राउज़र या फोन में प्रोफाइल खोलें')}
-                >
-                  <KeyRound className="w-3.5 h-3.5 text-stone-950" />
-                  <span>{t('Open on Other Browser 🔑', 'दूसरे ब्राउज़र में खोलें 🔑')}</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    soundEffects.playPop();
-                    openReportModal();
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-amber-100 hover:bg-amber-200 text-stone-900 font-black text-xs rounded-xl border border-amber-300 transition-all active:scale-95"
-                >
-                  <span>📜</span>
-                  <span>{t('Report Card', 'रिपोर्ट कार्ड')}</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    soundEffects.playPop();
-                    openProfileModal();
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs rounded-xl transition-all active:scale-95"
-                >
-                  <span>👤</span>
-                  <span>{t('Switch Kid', 'दूसरा बच्चा')}</span>
-                </button>
-              </div>
+            {/* Class-Wise & Age-Wise Comprehensive Syllabus & Questions (Tailored to student class & age) */}
+            <div className="pt-1">
+              <ClassWiseCurriculumView
+                selectedSubject={selectedSubject}
+                onSubjectChange={setSelectedSubject}
+                onSelectMaths={() => setActiveTab('maths')}
+              />
             </div>
 
             {/* 4 Clean, Spacious, Kid-Friendly Play & Learn Cards */}
@@ -461,14 +526,16 @@ export default function HomePage() {
                 <div className="mt-6">
                   <CurriculumDashboard
                     lessons={GRAMMAR_LESSONS}
-                    completedLessons={completedLessons}
-                    starsCount={starsCount}
+                    completedLessons={completedLessonsList}
+                    starsCount={totalChildStars}
                     currentLesson={activeLesson}
                     onSelectLesson={handleSelectLesson}
                     onSelectStage={handleSelectStage}
                   />
                 </div>
               </div>
+            )}
+              </>
             )}
           </div>
         )}
@@ -725,7 +792,7 @@ export default function HomePage() {
                     lessons={GRAMMAR_LESSONS}
                     activeLessonId={activeLesson.id}
                     onSelectLesson={handleSelectLesson}
-                    completedLessons={completedLessons}
+                    completedLessons={completedLessonsList}
                   />
 
                   {/* Main Picture Grammar Lesson */}
@@ -796,14 +863,28 @@ export default function HomePage() {
         )}
 
         {/* ========================================================
+            TAB: MATHS (MATHEMATICS LAB BY CLASS & AGE)
+            ======================================================== */}
+        {activeTab === 'maths' && (
+          <MathsExplorer
+            onBackToDashboard={() => setActiveTab('home')}
+          />
+        )}
+
+        {/* ========================================================
             TAB 3: PLAY (INTERACTIVE LEARNING GAMES)
             ======================================================== */}
         {activeTab === 'play' && (
-          <PlayGamesView
-            onEarnStar={(count) => {
-              completeLesson('game-play-' + Date.now(), count, count);
-            }}
-          />
+          isHindi ? (
+            <HindiGamesView />
+          ) : (
+            <PlayGamesView
+              onEarnStar={(count) => {
+                addStars(count, 'english');
+                markLessonCompleted('game-play-' + Date.now(), count);
+              }}
+            />
+          )
         )}
 
         {/* ========================================================
@@ -811,8 +892,8 @@ export default function HomePage() {
             ======================================================== */}
         {activeTab === 'stars' && (
           <MyStarsView
-            starsCount={starsCount}
-            completedLessonsCount={completedLessons.length}
+            starsCount={totalChildStars}
+            completedLessonsCount={completedLessonsList.length}
             totalLessonsCount={GRAMMAR_LESSONS.length}
             onContinueLearning={() => {
               setActiveTab('learn');
@@ -831,11 +912,19 @@ export default function HomePage() {
             'इंग्लिश किड्स लर्निंग अकादमी • चित्रों, आवाज़ों और खेलों के साथ सरल अंग्रेजी'
           )}
         </p>
-        {shouldShowHindi() && (
+        {isHindi && (
           <p className="font-hindi text-stone-500">
             हिंदी भाषी बच्चों के लिए चित्रों, आवाज़ों और खेलों के साथ सरल अंग्रेजी
           </p>
         )}
+        <div className="pt-2">
+          <Link
+            href="/admin"
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded-xl text-xs font-bold transition-all shadow-xs"
+          >
+            <span>🛡️ Teacher & Admin Portal</span>
+          </Link>
+        </div>
       </footer>
     </div>
   );

@@ -1,0 +1,448 @@
+const fs = require('fs');
+const path = require('path');
+
+const targetFile = path.resolve('src/data/classWiseCurriculumData.ts');
+
+const scriptContent = `export type GradeLevel = 'nursery' | 'class-1' | 'class-2' | 'class-3' | 'class-4-5';
+
+export interface CurriculumTopic {
+  id: string;
+  titleEnglish: string;
+  titleHindi: string;
+  descriptionEnglish: string;
+  descriptionHindi: string;
+  icon: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  keyConcepts: { english: string; hindi: string }[];
+  quizQuestions: {
+    questionEnglish: string;
+    questionHindi: string;
+    visual?: string;
+    options: string[];
+    correctAnswer: string;
+    explanationEnglish: string;
+    explanationHindi: string;
+  }[];
+}
+
+export interface GradeCurriculum {
+  id: GradeLevel;
+  gradeLabelEnglish: string;
+  gradeLabelHindi: string;
+  ageRange: string;
+  color: string;
+  englishTopics: CurriculumTopic[];
+  hindiTopics: CurriculumTopic[];
+  mathsTopics: CurriculumTopic[];
+}
+
+export const CLASS_WISE_CURRICULUM: Record<GradeLevel, GradeCurriculum> = {
+  // ========================================================
+  // 1. NURSERY & LKG (AGES 3-4)
+  // ========================================================
+  nursery: {
+    id: 'nursery',
+    gradeLabelEnglish: 'Nursery & LKG',
+    gradeLabelHindi: 'नर्सरी और LKG',
+    ageRange: 'Age 3-4 Yrs',
+    color: 'from-amber-400 to-orange-400',
+    mathsTopics: [
+      {
+        id: 'nursery-math-1',
+        titleEnglish: 'Counting 1 to 10',
+        titleHindi: 'गिनती १ से १० (Counting 1-10)',
+        descriptionEnglish: 'Count bright colorful objects, fingers, and toys with voice audio.',
+        descriptionHindi: 'सेब, तारे और गुब्बारों को गिनकर संख्या पहचानना सीखें।',
+        icon: '🔢',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: '1 = 🍎 (One)', hindi: '१ = 🍎 (एक)' },
+          { english: '2 = 🍎🍎 (Two)', hindi: '२ = 🍎🍎 (दो)' },
+          { english: '3 = 🍎🍎🍎 (Three)', hindi: '३ = 🍎🍎🍎 (तीन)' },
+          { english: '5 = 🖐️ (Five fingers)', hindi: '५ = 🖐️ (पाँच उंगलियाँ)' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'How many apples are there? 🍎🍎🍎',
+            questionHindi: 'यहाँ कितने सेब हैं? 🍎🍎🍎',
+            visual: '🍎🍎🍎',
+            options: ['2', '3', '4', '5'],
+            correctAnswer: '3',
+            explanationEnglish: 'There are 3 delicious red apples!',
+            explanationHindi: 'यहाँ ३ लाल सेब हैं!',
+          },
+          {
+            questionEnglish: 'Count the stars: ⭐⭐⭐⭐⭐',
+            questionHindi: 'सितारे गिनें: ⭐⭐⭐⭐⭐',
+            visual: '⭐⭐⭐⭐⭐',
+            options: ['4', '5', '6', '3'],
+            correctAnswer: '5',
+            explanationEnglish: 'There are 5 bright shiny stars!',
+            explanationHindi: 'यहाँ ५ चमकीले सितारे हैं!',
+          },
+          {
+            questionEnglish: 'How many cars do you see? 🚗🚗',
+            questionHindi: 'यहाँ कितनी गाड़ियाँ हैं? 🚗🚗',
+            visual: '🚗🚗',
+            options: ['1', '2', '3', '4'],
+            correctAnswer: '2',
+            explanationEnglish: 'There are 2 speedy cars!',
+            explanationHindi: 'यहाँ २ गाड़ियाँ हैं!',
+          },
+          {
+            questionEnglish: 'Count the cute ducks: 🦆🦆🦆🦆',
+            questionHindi: 'बतखों को गिनें: 🦆🦆🦆🦆',
+            visual: '🦆🦆🦆🦆',
+            options: ['3', '4', '5', '2'],
+            correctAnswer: '4',
+            explanationEnglish: 'There are 4 happy yellow ducks!',
+            explanationHindi: 'यहाँ ४ बतखें हैं!',
+          },
+          {
+            questionEnglish: 'How many balloons are floating? 🎈🎈🎈🎈🎈🎈',
+            questionHindi: 'कितने गुब्बारे उड़ रहे हैं? 🎈🎈🎈🎈🎈🎈',
+            visual: '🎈🎈🎈🎈🎈🎈',
+            options: ['5', '6', '7', '4'],
+            correctAnswer: '6',
+            explanationEnglish: 'There are 6 colorful balloons!',
+            explanationHindi: 'यहाँ ६ रंग-बिरंगे गुब्बारे हैं!',
+          },
+        ],
+      },
+      {
+        id: 'nursery-math-2',
+        titleEnglish: 'Shapes & Colors',
+        titleHindi: 'आकार और रंग (Shapes & Colors)',
+        descriptionEnglish: 'Identify Circle, Square, Triangle, and vibrant colors.',
+        descriptionHindi: 'गोल (वृत्त), चौकोर (वर्ग) और त्रिकोण पहचानें।',
+        icon: '🔵',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'Circle 🔴 is round like a ball', hindi: 'गोला 🔴 गेंद जैसा गोल होता है' },
+          { english: 'Square 🟦 has 4 equal sides', hindi: 'चौकोर 🟦 की ४ बराबर भुजाएं होती हैं' },
+          { english: 'Triangle 🔺 has 3 corners', hindi: 'त्रिकोण 🔺 के ३ कोने होते हैं' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'Which shape is round like a wheel? 🔴',
+            questionHindi: 'पहिए जैसा गोल कौन सा आकार है? 🔴',
+            visual: '🔴',
+            options: ['Circle (गोला)', 'Square (चौकोर)', 'Triangle (त्रिकोण)'],
+            correctAnswer: 'Circle (गोला)',
+            explanationEnglish: 'A circle is round with no corners!',
+            explanationHindi: 'गोला (Circle) गेंद और पहिए जैसा गोल होता है!',
+          },
+          {
+            questionEnglish: 'Which shape has 3 corners like a pizza slice? 🔺',
+            questionHindi: 'पिज्ज़ा स्लाइस जैसा ३ कोनों वाला आकार कौन सा है? 🔺',
+            visual: '🍕 🔺',
+            options: ['Triangle (त्रिकोण)', 'Circle (गोला)', 'Square (चौकोर)'],
+            correctAnswer: 'Triangle (त्रिकोण)',
+            explanationEnglish: 'A triangle has exactly 3 corners and 3 sides!',
+            explanationHindi: 'त्रिकोण (Triangle) में ३ कोने होते हैं!',
+          },
+          {
+            questionEnglish: 'Which shape has 4 equal sides like a gift box? 🟦',
+            questionHindi: 'गिफ्ट बॉक्स जैसा ४ बराबर भुजाओं वाला आकार कौन सा है? 🟦',
+            visual: '🎁 🟦',
+            options: ['Square (चौकोर)', 'Circle (गोला)', 'Triangle (त्रिकोण)'],
+            correctAnswer: 'Square (चौकोर)',
+            explanationEnglish: 'A square has 4 equal sides and 4 straight corners!',
+            explanationHindi: 'वर्ग (Square) की चारों भुजाएं बराबर होती हैं!',
+          },
+          {
+            questionEnglish: 'What color is the bright shining sun? ☀️',
+            questionHindi: 'चमकते हुए सूरज का रंग कौन सा होता है? ☀️',
+            visual: '☀️',
+            options: ['Yellow (पीला)', 'Blue (नीला)', 'Green (हरा)', 'Pink (गुलाबी)'],
+            correctAnswer: 'Yellow (पीला)',
+            explanationEnglish: 'The sun shines with a bright yellow light!',
+            explanationHindi: 'सूरज पीले रंग का चमकता है!',
+          },
+          {
+            questionEnglish: 'What color is the fresh garden grass? 🌱',
+            questionHindi: 'ताज़ी हरी घास का रंग कौन सा होता है? 🌱',
+            visual: '🌱',
+            options: ['Green (हरा)', 'Red (लाल)', 'Black (काला)', 'Purple (बैंगनी)'],
+            correctAnswer: 'Green (हरा)',
+            explanationEnglish: 'Grass and plant leaves are green!',
+            explanationHindi: 'घास और पेड़ के पत्ते हरे होते हैं!',
+          },
+        ],
+      },
+      {
+        id: 'nursery-math-3',
+        titleEnglish: 'Big vs Small & Sizes',
+        titleHindi: 'बड़ा और छोटा (Big vs Small)',
+        descriptionEnglish: 'Compare sizes: Elephant vs Mouse, Tall tree vs Small bush.',
+        descriptionHindi: 'आकार की तुलना: बड़ा हाथी, छोटा चूहा, लंबा और नाटा।',
+        icon: '🐘',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'Elephant 🐘 is BIG', hindi: 'हाथी 🐘 बड़ा है' },
+          { english: 'Mouse 🐭 is SMALL', hindi: 'चूहा 🐭 छोटा है' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'Which animal is BIGGER? 🐘 or 🐭',
+            questionHindi: 'कौन सा जानवर बड़ा है? 🐘 या 🐭',
+            visual: '🐘 vs 🐭',
+            options: ['Elephant 🐘 (हाथी)', 'Mouse 🐭 (चूहा)'],
+            correctAnswer: 'Elephant 🐘 (हाथी)',
+            explanationEnglish: 'Elephant is huge and heavy!',
+            explanationHindi: 'हाथी चूहे से बहुत बड़ा होता है!',
+          },
+          {
+            questionEnglish: 'Which fruit is SMALLER? 🍉 or 🍓',
+            questionHindi: 'कौन सा फल छोटा है? 🍉 या 🍓',
+            visual: '🍉 vs 🍓',
+            options: ['Strawberry 🍓 (स्ट्रॉबेरी)', 'Watermelon 🍉 (तरबूज)'],
+            correctAnswer: 'Strawberry 🍓 (स्ट्रॉबेरी)',
+            explanationEnglish: 'A strawberry is tiny compared to a giant watermelon!',
+            explanationHindi: 'स्ट्रॉबेरी तरबूज से बहुत छोटी होती है!',
+          },
+          {
+            questionEnglish: 'Which animal is TALLER? 🦒 or 🐇',
+            questionHindi: 'कौन सा जानवर अधिक लंबा है? 🦒 या 🐇',
+            visual: '🦒 vs 🐇',
+            options: ['Giraffe 🦒 (जिराफ़)', 'Rabbit 🐇 (खरगोश)'],
+            correctAnswer: 'Giraffe 🦒 (जिराफ़)',
+            explanationEnglish: 'The giraffe has a very tall neck!',
+            explanationHindi: 'जिराफ़ की गर्दन बहुत लंबी होती है!',
+          },
+          {
+            questionEnglish: 'Which vehicle is HEAVIER? 🚌 or 🚲',
+            questionHindi: 'कौन सा वाहन अधिक भारी है? 🚌 या 🚲',
+            visual: '🚌 vs 🚲',
+            options: ['Bus 🚌 (बस)', 'Bicycle 🚲 (साइकिल)'],
+            correctAnswer: 'Bus 🚌 (बस)',
+            explanationEnglish: 'A bus is huge and much heavier than a bicycle!',
+            explanationHindi: 'बस साइकिल से बहुत भारी होती है!',
+          },
+        ],
+      },
+    ],
+    englishTopics: [
+      {
+        id: 'nursery-eng-1',
+        titleEnglish: 'Alphabet Sounds (A to Z)',
+        titleHindi: 'वर्णमाला ध्वनि (Letter Phonics A-Z)',
+        descriptionEnglish: 'Learn the first sound of everyday objects: A for Apple, B for Ball.',
+        descriptionHindi: 'अक्षरों की आवाज़ पहचानें: A से Apple, B से Ball।',
+        icon: '🔤',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'A says /æ/ as in 🍎 Apple', hindi: 'A की आवाज़ /ऐ/ जैसे Apple' },
+          { english: 'B says /b/ as in ⚽ Ball', hindi: 'B की आवाज़ /ब/ जैसे Ball' },
+          { english: 'C says /k/ as in 🐱 Cat', hindi: 'C की आवाज़ /क/ जैसे Cat' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'What is the first letter of 🍎 Apple?',
+            questionHindi: '🍎 Apple का पहला अक्षर कौन सा है?',
+            visual: '🍎',
+            options: ['A', 'B', 'C', 'D'],
+            correctAnswer: 'A',
+            explanationEnglish: 'A is for Apple! /æ/ Apple.',
+            explanationHindi: 'A से Apple होता है!',
+          },
+          {
+            questionEnglish: 'What is the first letter of 🐱 Cat?',
+            questionHindi: '🐱 Cat (बिल्ली) का पहला अक्षर क्या है?',
+            visual: '🐱',
+            options: ['C', 'K', 'S', 'T'],
+            correctAnswer: 'C',
+            explanationEnglish: 'C is for Cat! /k/ /k/ Cat.',
+            explanationHindi: 'C से Cat होता है!',
+          },
+          {
+            questionEnglish: 'What is the first letter of 🦁 Lion?',
+            questionHindi: '🦁 Lion (शेर) किस अक्षर से शुरू होता है?',
+            visual: '🦁',
+            options: ['L', 'M', 'N', 'P'],
+            correctAnswer: 'L',
+            explanationEnglish: 'L is for Lion! /l/ Lion.',
+            explanationHindi: 'L से Lion होता है!',
+          },
+          {
+            questionEnglish: 'What is the first letter of ☀️ Sun?',
+            questionHindi: '☀️ Sun (सूरज) किस अक्षर से शुरू होता है?',
+            visual: '☀️',
+            options: ['S', 'C', 'Z', 'T'],
+            correctAnswer: 'S',
+            explanationEnglish: 'S is for Sun! /s/ Sun.',
+            explanationHindi: 'S से Sun होता है!',
+          },
+        ],
+      },
+      {
+        id: 'nursery-eng-2',
+        titleEnglish: '3-Letter Sight Words',
+        titleHindi: '३ अक्षरों वाले सरल शब्द (Sight Words)',
+        descriptionEnglish: 'Read easy 3-letter CVC words like CAT, SUN, DOG, BUS.',
+        descriptionHindi: 'CAT, SUN, DOG जैसे सरल शब्दों को चित्रों के साथ पढ़ें।',
+        icon: '📖',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'C-A-T = CAT 🐱', hindi: 'क-ऐ-ट = कैट (बिल्ली)' },
+          { english: 'S-U-N = SUN ☀️', hindi: 'स-अ-न = सन (सूरज)' },
+          { english: 'D-O-G = DOG 🐶', hindi: 'ड-ऑ-ग = डॉग (कुत्ता)' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'Which word matches the picture? ☀️',
+            questionHindi: 'चित्र के लिए सही शब्द कौन सा है? ☀️',
+            visual: '☀️',
+            options: ['SUN', 'CAT', 'DOG', 'BUS'],
+            correctAnswer: 'SUN',
+            explanationEnglish: 'SUN means the bright yellow sun in the sky!',
+            explanationHindi: 'SUN का अर्थ है सूरज!',
+          },
+          {
+            questionEnglish: 'Which word matches the picture? 🐱',
+            questionHindi: 'चित्र के लिए सही शब्द कौन सा है? 🐱',
+            visual: '🐱',
+            options: ['CAT', 'BAT', 'RAT', 'HAT'],
+            correctAnswer: 'CAT',
+            explanationEnglish: 'CAT is the cute meowing animal!',
+            explanationHindi: 'CAT का अर्थ बिल्ली है!',
+          },
+          {
+            questionEnglish: 'Which word matches the picture? 🚗',
+            questionHindi: 'चित्र के लिए सही शब्द कौन सा है? 🚗',
+            visual: '🚗',
+            options: ['CAR', 'BUS', 'VAN', 'CAB'],
+            correctAnswer: 'CAR',
+            explanationEnglish: 'CAR is a vehicle with 4 wheels!',
+            explanationHindi: 'CAR का अर्थ गाड़ी है!',
+          },
+          {
+            questionEnglish: 'Which word matches the picture? 🐶',
+            questionHindi: 'चित्र के लिए सही शब्द कौन सा है? 🐶',
+            visual: '🐶',
+            options: ['DOG', 'PIG', 'FOX', 'COW'],
+            correctAnswer: 'DOG',
+            explanationEnglish: 'DOG is a friendly barking pet!',
+            explanationHindi: 'DOG का अर्थ कुत्ता है!',
+          },
+        ],
+      },
+    ],
+    hindiTopics: [
+      {
+        id: 'nursery-hin-1',
+        titleEnglish: 'Hindi Swar (अ से अः)',
+        titleHindi: 'हिंदी स्वर (अ से अः)',
+        descriptionEnglish: 'Learn 13 Hindi vowels with audio pronunciation and pictures.',
+        descriptionHindi: 'अ से अनार, आ से आम, इ से इमली को चित्रों व आवाज़ से पहचानें।',
+        icon: '🔤',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'अ = अनार (Pomegranate)', hindi: 'अ से अनार 🍎' },
+          { english: 'आ = आम (Mango)', hindi: 'आ से आम 🥭' },
+          { english: 'इ = इमली (Tamarind)', hindi: 'इ से इमली 🌿' },
+          { english: 'ई = ईख (Sugarcane)', hindi: 'ई से ईख 🎋' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'अनार 🍎 किस स्वर से शुरू होता है?',
+            questionHindi: 'अनार 🍎 किस स्वर से शुरू होता है?',
+            visual: '🍎',
+            options: ['अ', 'आ', 'इ', 'ई'],
+            correctAnswer: 'अ',
+            explanationEnglish: 'अ से अनार होता है!',
+            explanationHindi: 'अ से अनार होता है!',
+          },
+          {
+            questionEnglish: 'आम 🥭 किस स्वर से शुरू होता है?',
+            questionHindi: 'आम 🥭 किस स्वर से शुरू होता है?',
+            visual: '🥭',
+            options: ['आ', 'अ', 'उ', 'ए'],
+            correctAnswer: 'आ',
+            explanationEnglish: 'आ से मीठा आम होता है!',
+            explanationHindi: 'आ से मीठा आम होता है!',
+          },
+          {
+            questionEnglish: 'इमली किस स्वर से शुरू होती है?',
+            questionHindi: 'इमली किस स्वर से शुरू होती है?',
+            visual: '🌿',
+            options: ['इ', 'ई', 'उ', 'ऋ'],
+            correctAnswer: 'इ',
+            explanationEnglish: 'इ से खट्टी इमली होती है!',
+            explanationHindi: 'इ से खट्टी इमली होती है!',
+          },
+          {
+            questionEnglish: 'ऊन 🧶 किस स्वर से शुरू होती है?',
+            questionHindi: 'ऊन 🧶 किस स्वर से शुरू होती है?',
+            visual: '🧶',
+            options: ['ऊ', 'उ', 'ओ', 'औ'],
+            correctAnswer: 'ऊ',
+            explanationEnglish: 'ऊ से गरम ऊन होती है!',
+            explanationHindi: 'ऊ से गरम ऊन होती है!',
+          },
+        ],
+      },
+      {
+        id: 'nursery-hin-2',
+        titleEnglish: 'Hindi Vyanjan Basics (क से घ)',
+        titleHindi: 'व्यंजन पहचान (क, ख, ग, घ)',
+        descriptionEnglish: 'First consonants of Hindi alphabet: Kamal, Khargosh, Gamla, Ghadi.',
+        descriptionHindi: 'क से कमल, ख से खरगोश, ग से गमला, घ से घड़ी।',
+        icon: '🎨',
+        difficulty: 'Beginner',
+        keyConcepts: [
+          { english: 'क = कमल (Lotus)', hindi: 'क से कमल 🪷' },
+          { english: 'ख = खरगोश (Rabbit)', hindi: 'ख से खरगोश 🐇' },
+          { english: 'ग = गमला (Pot)', hindi: 'ग से गमला 🪴' },
+          { english: 'घ = घड़ी (Clock)', hindi: 'घ से घड़ी ⏰' },
+        ],
+        quizQuestions: [
+          {
+            questionEnglish: 'क + ल मिलकर कौन सा शब्द बनता है?',
+            questionHindi: 'क + ल मिलकर कौन सा शब्द बनता है?',
+            visual: 'क + ल',
+            options: ['कल', 'कम', 'कप', 'कर'],
+            correctAnswer: 'कल',
+            explanationEnglish: 'क और ल मिलकर "कल" बनता है!',
+            explanationHindi: 'क और ल मिलकर "कल" बनता है!',
+          },
+          {
+            questionEnglish: 'कमल 🪷 किस अक्षर से शुरू होता है?',
+            questionHindi: 'कमल 🪷 किस अक्षर से शुरू होता है?',
+            visual: '🪷',
+            options: ['क', 'ख', 'ग', 'घ'],
+            correctAnswer: 'क',
+            explanationEnglish: 'क से कमल!',
+            explanationHindi: 'क से कमल!',
+          },
+          {
+            questionEnglish: 'घड़ी ⏰ किस अक्षर से शुरू होती है?',
+            questionHindi: 'घड़ी ⏰ किस अक्षर से शुरू होती है?',
+            visual: '⏰',
+            options: ['घ', 'ग', 'च', 'छ'],
+            correctAnswer: 'घ',
+            explanationEnglish: 'घ से घड़ी!',
+            explanationHindi: 'घ से घड़ी!',
+          },
+          {
+            questionEnglish: 'गमला 🪴 किस अक्षर से शुरू होता है?',
+            questionHindi: 'गमला 🪴 किस अक्षर से शुरू होता है?',
+            visual: '🪴',
+            options: ['ग', 'घ', 'क', 'प'],
+            correctAnswer: 'ग',
+            explanationEnglish: 'ग से सुंदर गमला!',
+            explanationHindi: 'ग से सुंदर गमला!',
+          },
+        ],
+      },
+    ],
+  },
+};
+`;
+
+console.log("Template prepared");
+`;
+
+fs.writeFileSync(path.resolve('brain/scratch/buildCurriculum.js'), scriptContent);
+console.log("Wrote buildCurriculum.js");
+

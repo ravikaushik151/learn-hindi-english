@@ -1,0 +1,1326 @@
+{
+  "nursery": {
+    "scienceTopics": [
+      {
+        "id": "nursery-sci-1",
+        "titleEnglish": "My Body Parts (शरीर के अंग)",
+        "titleHindi": "शरीर के अंग व उनके काम",
+        "descriptionEnglish": "Learn about eyes, nose, ears, hands, and feet with pictures.",
+        "descriptionHindi": "आँख, कान, नाक, हाथ और पैरों को चित्रों से पहचानें।",
+        "icon": "👀",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Eyes = See 👁️",
+            "hindi": "आँखें = देखना"
+          },
+          {
+            "english": "Nose = Smell 👃",
+            "hindi": "नाक = सूंघना"
+          },
+          {
+            "english": "Ears = Hear 👂",
+            "hindi": "कान = सुनना"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which body part do we use to see books and toys? 👀",
+            "questionHindi": "किताबें और खिलौने देखने के लिए हम किस अंग का उपयोग करते हैं? 👀",
+            "visual": "👀 📖",
+            "options": [
+              "Eyes (आँखें)",
+              "Nose (नाक)",
+              "Ears (कान)",
+              "Feet (पैर)"
+            ],
+            "correctAnswer": "Eyes (आँखें)",
+            "explanationEnglish": "We see with our eyes! Eyes help us view beautiful colors and books.",
+            "explanationHindi": "हम अपनी आँखों से देखते हैं!"
+          },
+          {
+            "questionEnglish": "Which body part do we use to smell sweet flowers? 👃",
+            "questionHindi": "सुगंधित फूलों को सूंघने के लिए हम किसका उपयोग करते हैं? 👃",
+            "visual": "👃 🌸",
+            "options": [
+              "Nose (नाक)",
+              "Hands (हाथ)",
+              "Teeth (दांत)",
+              "Tongue (जीभ)"
+            ],
+            "correctAnswer": "Nose (नाक)",
+            "explanationEnglish": "Our nose helps us smell fragrances and food.",
+            "explanationHindi": "नाक से हम खुशबू और गंध सूंघते हैं।"
+          },
+          {
+            "questionEnglish": "How many legs does a human child have to walk and jump? 🦵",
+            "questionHindi": "चलने और कूदने के लिए हमारे कितने पैर होते हैं? 🦵",
+            "visual": "🦵 🏃",
+            "options": [
+              "2 Legs (दो पैर)",
+              "4 Legs",
+              "1 Leg",
+              "6 Legs"
+            ],
+            "correctAnswer": "2 Legs (दो पैर)",
+            "explanationEnglish": "Humans have 2 legs to walk, run, and jump!",
+            "explanationHindi": "मनुष्य के चलने-दौड़ने के लिए २ पैर होते हैं!"
+          }
+        ]
+      },
+      {
+        "id": "nursery-sci-2",
+        "titleEnglish": "Animals & Their Sounds (जानवर और आवाजें)",
+        "titleHindi": "प्यारे जानवर और उनकी बोलियाँ",
+        "descriptionEnglish": "Learn friendly domestic and wild animals and the sounds they make.",
+        "descriptionHindi": "कुत्ता, बिल्ली, गाय और शेर की पहचान और आवाजें।",
+        "icon": "🐶",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Dog = Bow-Bow 🐶",
+            "hindi": "कुत्ता = भौं-भौं"
+          },
+          {
+            "english": "Cat = Meow-Meow 🐱",
+            "hindi": "बिल्ली = म्याऊँ"
+          },
+          {
+            "english": "Cow = Moo-Moo 🐮",
+            "hindi": "गाय = अम्मा/मूँ"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which friendly animal says 'Bow-Bow' and guards our home? 🐶",
+            "questionHindi": "कौन सा वफादार जानवर 'भौं-भौं' करता है और घर की रखवाली करता है? 🐶",
+            "visual": "🐶 🦴",
+            "options": [
+              "Dog (कुत्ता) 🐕",
+              "Cat (बिल्ली) 🐈",
+              "Cow (गाय) 🐮",
+              "Lion (शेर) 🦁"
+            ],
+            "correctAnswer": "Dog (कुत्ता) 🐕",
+            "explanationEnglish": "Dogs say 'Bow-Bow' or 'Woof-Woof'!",
+            "explanationHindi": "कुत्ता भौं-भौं करता है!"
+          },
+          {
+            "questionEnglish": "Which gentle farm animal gives us healthy sweet milk? 🐮",
+            "questionHindi": "हमें मीठा और पौष्टिक दूध कौन सा जानवर देता है? 🐮",
+            "visual": "🐮 🥛",
+            "options": [
+              "Cow (गाय) 🐮",
+              "Monkey (बंदर) 🐒",
+              "Tiger (बाघ) 🐅",
+              "Rabbit (खरगोश) 🐇"
+            ],
+            "correctAnswer": "Cow (गाय) 🐮",
+            "explanationEnglish": "Cows give us fresh healthy milk everyday!",
+            "explanationHindi": "गाय हमें स्वादिष्ट और पौष्टिक दूध देती है।"
+          }
+        ]
+      }
+    ],
+    "gkTopics": [
+      {
+        "id": "nursery-gk-1",
+        "titleEnglish": "Colors All Around Us (हमारे रंग)",
+        "titleHindi": "रंगों की सतरंगी दुनिया",
+        "descriptionEnglish": "Identify red, blue, green, yellow and rainbow shades.",
+        "descriptionHindi": "लाल, पीला, हरा, नीला रंगों की पहचान करें।",
+        "icon": "🎨",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Apple = Red 🍎",
+            "hindi": "सेब = लाल"
+          },
+          {
+            "english": "Leaf = Green 🍃",
+            "hindi": "पत्ती = हरी"
+          },
+          {
+            "english": "Sun = Yellow ☀️",
+            "hindi": "सूरज = पीला"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "What is the bright color of a delicious ripe apple? 🍎",
+            "questionHindi": "स्वादिष्ट पके हुए सेब का रंग क्या होता है? 🍎",
+            "visual": "🍎 🔴",
+            "options": [
+              "Red (लाल)",
+              "Blue (नीला)",
+              "Black (काला)",
+              "White (सफेद)"
+            ],
+            "correctAnswer": "Red (लाल)",
+            "explanationEnglish": "Apples are bright red in color!",
+            "explanationHindi": "सेब लाल रंग का होता है!"
+          },
+          {
+            "questionEnglish": "What is the color of fresh tree leaves and garden grass? 🌿",
+            "questionHindi": "पेड़ की पत्तियों और बगीचे की हरी घास का रंग क्या है? 🌿",
+            "visual": "🌿 🍃",
+            "options": [
+              "Green (हरा)",
+              "Pink (गुलाबी)",
+              "Purple (बैंगनी)",
+              "Brown (भूरा)"
+            ],
+            "correctAnswer": "Green (हरा)",
+            "explanationEnglish": "Leaves and garden grass are vibrant green!",
+            "explanationHindi": "घास और पत्तियां हरी होती हैं!"
+          }
+        ]
+      },
+      {
+        "id": "nursery-gk-2",
+        "titleEnglish": "Fruits & Sweet Treats (फल और भोजन)",
+        "titleHindi": "स्वादिष्ट फल और उनका पोषण",
+        "descriptionEnglish": "Learn delicious fruits: Mango, Banana, Apple & Watermelon.",
+        "descriptionHindi": "आम, केला, अंगूर और तरबूज की पहचान करें।",
+        "icon": "🥭",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Mango = King of Fruits 🥭",
+            "hindi": "आम = फलों का राजा"
+          },
+          {
+            "english": "Banana = Monkey favorite 🍌",
+            "hindi": "केला = ऊर्जा का स्रोत"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Who is celebrated as the sweet 'King of Fruits' in India? 🥭",
+            "questionHindi": "भारत में 'फलों का राजा' किस फल को कहा जाता है? 🥭",
+            "visual": "🥭 👑",
+            "options": [
+              "Mango (आम) 🥭",
+              "Lemon (नींबू) 🍋",
+              "Onion (प्याज) 🧅",
+              "Potato (आलू) 🥔"
+            ],
+            "correctAnswer": "Mango (आम) 🥭",
+            "explanationEnglish": "Mango is the King of Fruits and India's national fruit!",
+            "explanationHindi": "आम को सभी फलों का राजा कहा जाता है!"
+          },
+          {
+            "questionEnglish": "Which fruit is yellow, easy to peel, and monkeys love it? 🍌",
+            "questionHindi": "कौन सा फल पीला होता है, छीलकर खाया जाता है और बंदरों को खूब भाता है? 🍌",
+            "visual": "🍌 🐒",
+            "options": [
+              "Banana (केला) 🍌",
+              "Watermelon (तरबूज) 🍉",
+              "Coconut (नारियल) 🥥",
+              "Chilli (मिर्च) 🌶️"
+            ],
+            "correctAnswer": "Banana (केला) 🍌",
+            "explanationEnglish": "Bananas are yellow, soft, sweet, and full of energy!",
+            "explanationHindi": "केला पीला और मीठा फल होता है!"
+          }
+        ]
+      }
+    ]
+  },
+  "class-1": {
+    "scienceTopics": [
+      {
+        "id": "class1-sci-1",
+        "titleEnglish": "Living & Non-Living Things (सजीव और निर्जीव)",
+        "titleHindi": "सजीव और निर्जीव वस्तुओं की पहचान",
+        "descriptionEnglish": "Understand the difference between things that breathe/grow vs objects.",
+        "descriptionHindi": "जो वस्तुएं सांस लेती हैं और बढ़ती हैं वे सजीव हैं।",
+        "icon": "🌱",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Living: Grow, Breathe, Eat 🌱",
+            "hindi": "सजीव: बढ़ते हैं, सांस लेते हैं"
+          },
+          {
+            "english": "Non-Living: Cannot move or grow 🪨",
+            "hindi": "निर्जीव: बढ़ नहीं सकते"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which of these is a LIVING thing that breathes, eats, and grows? 🌱",
+            "questionHindi": "इनमें से कौन सजीव वस्तु है जो सांस लेती है और बड़ी होती है? 🌱",
+            "visual": "🐶 🚗 🪑",
+            "options": [
+              "Little Puppy (पिल्ला) 🐶",
+              "Toy Car (खिलौना कार) 🚗",
+              "Wooden Table (मेज़) 🪑",
+              "Pencil (पेंसिल) ✏️"
+            ],
+            "correctAnswer": "Little Puppy (पिल्ला) 🐶",
+            "explanationEnglish": "Puppies are living animals—they eat, breathe, grow, and play!",
+            "explanationHindi": "पिल्ला सजीव है, यह बढ़ता है और सांस लेता है।"
+          },
+          {
+            "questionEnglish": "Which part of a plant stays underground and drinks water from the soil? 🌱",
+            "questionHindi": "पौधे का कौन सा भाग मिट्टी के अंदर रहकर पानी सोखता है? 🌱",
+            "visual": "🌱 💧 🪨",
+            "options": [
+              "Roots (जड़ें) 🌿",
+              "Flowers (फूल) 🌸",
+              "Fruit (फल) 🍎",
+              "Leaves (पत्तियां) 🍃"
+            ],
+            "correctAnswer": "Roots (जड़ें) 🌿",
+            "explanationEnglish": "Roots fix the plant into the soil and absorb water and nutrients!",
+            "explanationHindi": "जड़ें मिट्टी से पानी और खनिज चूसती हैं।"
+          },
+          {
+            "questionEnglish": "What three essential things does a seed need to sprout into a plant? ☀️",
+            "questionHindi": "एक नन्हे बीज को पौधा बनने के लिए किन तीन चीजों की जरूरत होती है? ☀️",
+            "visual": "🌱 ☀️ 💧",
+            "options": [
+              "Sunlight, Water & Air (धूप, पानी व हवा)",
+              "Juice, Milk & Sugar",
+              "Ice & Salt",
+              "Only Darkness"
+            ],
+            "correctAnswer": "Sunlight, Water & Air (धूप, पानी व हवा)",
+            "explanationEnglish": "Seeds need warm sunlight, fresh water, and clean air to grow!",
+            "explanationHindi": "पौधों को सूर्य की धूप, पानी और हवा चाहिए।"
+          }
+        ]
+      },
+      {
+        "id": "class1-sci-2",
+        "titleEnglish": "Weather & The Four Seasons (मौसम और ऋतुएँ)",
+        "titleHindi": "मौसम व चार मुख्य ऋतुएँ",
+        "descriptionEnglish": "Explore summer heat, winter snow, monsoon rain, and spring flowers.",
+        "descriptionHindi": "गर्मी, सर्दी, वर्षा और वसंत ऋतु की विशेषताएं।",
+        "icon": "⛅",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Summer: Hot & Sunny ☀️",
+            "hindi": "गर्मी: तेज धूप"
+          },
+          {
+            "english": "Rainy: Rain & Umbrella 🌧️",
+            "hindi": "वर्षा: बारिश व छाता"
+          },
+          {
+            "english": "Winter: Cold & Sweaters ❄️",
+            "hindi": "सर्दी: ऊनी कपड़े"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "In which season do we feel chilly and wear warm woolen sweaters? ❄️",
+            "questionHindi": "किस मौसम में ठंड लगती है और हम ऊनी स्वेटर व मफलर पहनते हैं? ❄️",
+            "visual": "🧣 🧤 ❄️",
+            "options": [
+              "Winter (सर्दी/शीत ऋतु) ❄️",
+              "Summer (गर्मी) ☀️",
+              "Rainy (बरसात) 🌧️",
+              "Autumn (पतझड़) 🍂"
+            ],
+            "correctAnswer": "Winter (सर्दी/शीत ऋतु) ❄️",
+            "explanationEnglish": "In winter, the weather gets cold and sweaters keep us cozy!",
+            "explanationHindi": "सर्दियों में ठंड से बचने के लिए स्वेटर पहनते हैं।"
+          },
+          {
+            "questionEnglish": "What do we use to stay dry when dark clouds bring pouring rain? 🌧️",
+            "questionHindi": "जब आसमान से रिमझिम बारिश गिरती है, तब भीगने से बचने के लिए क्या लेते हैं? 🌧️",
+            "visual": "☔ 🌧️ 🌈",
+            "options": [
+              "Umbrella & Raincoat (छाता व बरसाती) ☔",
+              "Sunglasses (धूप का चश्मा) 🕶️",
+              "Woolen Gloves (दस्ताने) 🧤",
+              "Fan (पंखा) 🪭"
+            ],
+            "correctAnswer": "Umbrella & Raincoat (छाता व बरसाती) ☔",
+            "explanationEnglish": "An umbrella or raincoat protects our clothes from rainwater.",
+            "explanationHindi": "छाता और रेनकोट हमें बारिश के पानी से बचाते हैं।"
+          }
+        ]
+      }
+    ],
+    "gkTopics": [
+      {
+        "id": "class1-gk-1",
+        "titleEnglish": "National Symbols of India (राष्ट्रीय प्रतीक)",
+        "titleHindi": "भारत के गौरवशाली राष्ट्रीय प्रतीक",
+        "descriptionEnglish": "Learn our National Flag, National Bird, Animal, and Flower.",
+        "descriptionHindi": "तिरंगा, मोर, बाघ, कमल और राष्ट्रीय चिन्ह।",
+        "icon": "🇮🇳",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Bird: Peacock 🦚",
+            "hindi": "पक्षी: मोर"
+          },
+          {
+            "english": "Animal: Royal Bengal Tiger 🐅",
+            "hindi": "पशु: बाघ"
+          },
+          {
+            "english": "Flower: Lotus 🪷",
+            "hindi": "पुष्प: कमल"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which magnificent bird with colorful feathers is India's National Bird? 🦚",
+            "questionHindi": "मनमोहक रंग-बिरंगे पंखों वाला कौन सा पक्षी भारत का राष्ट्रीय पक्षी है? 🦚",
+            "visual": "🦚 🇮🇳",
+            "options": [
+              "Peacock (मोर) 🦚",
+              "Parrot (तोता) 🦜",
+              "Pigeon (कबूतर) 🕊️",
+              "Crow (कौआ) 🐦"
+            ],
+            "correctAnswer": "Peacock (मोर) 🦚",
+            "explanationEnglish": "The Peacock (Mayur) is the proud National Bird of India!",
+            "explanationHindi": "मोर भारत का राष्ट्रीय पक्षी है!"
+          },
+          {
+            "questionEnglish": "Which powerful striped big cat is the National Animal of India? 🐅",
+            "questionHindi": "धारीदार शरीर वाला कौन सा शक्तिशाली जानवर भारत का राष्ट्रीय पशु है? 🐅",
+            "visual": "🐅 🇮🇳",
+            "options": [
+              "Royal Bengal Tiger (बाघ) 🐅",
+              "African Lion (शेर) 🦁",
+              "Cheetah (चीता) 🐆",
+              "Elephant (हाथी) 🐘"
+            ],
+            "correctAnswer": "Royal Bengal Tiger (बाघ) 🐅",
+            "explanationEnglish": "The Royal Bengal Tiger represents strength, grace, and national power.",
+            "explanationHindi": "बाघ (Tiger) भारत का राष्ट्रीय पशु है।"
+          },
+          {
+            "questionEnglish": "What is India's National Flower that blooms beautifully in ponds? 🪷",
+            "questionHindi": "पानी और कीचड़ में भी पवित्रता से खिलने वाला भारत का राष्ट्रीय फूल कौन सा है? 🪷",
+            "visual": "🪷 💧",
+            "options": [
+              "Lotus (कमल) 🪷",
+              "Rose (गुलाब) 🌹",
+              "Sunflower (सूरजमुखी) 🌻",
+              "Marigold (गेंदा) 🌼"
+            ],
+            "correctAnswer": "Lotus (कमल) 🪷",
+            "explanationEnglish": "The Lotus (Kamal) symbolizes purity and auspiciousness.",
+            "explanationHindi": "कमल (Lotus) भारत का राष्ट्रीय फूल है।"
+          }
+        ]
+      },
+      {
+        "id": "class1-gk-2",
+        "titleEnglish": "Our Community Helpers (हमारे मददगार)",
+        "titleHindi": "समाज के सहायक व मददगार",
+        "descriptionEnglish": "Learn about Doctors, Teachers, Firefighters, and Police officers.",
+        "descriptionHindi": "डॉक्टर, शिक्षक, पुलिस और सफाईकर्मियों का योगदान।",
+        "icon": "👩‍⚕️",
+        "difficulty": "Beginner",
+        "keyConcepts": [
+          {
+            "english": "Doctor = Cures Illness 🩺",
+            "hindi": "डॉक्टर = इलाज करते हैं"
+          },
+          {
+            "english": "Teacher = Educates 👩‍🏫",
+            "hindi": "शिक्षक = ज्ञान देते हैं"
+          },
+          {
+            "english": "Police = Protects 👮",
+            "hindi": "पुलिस = सुरक्षा करती है"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Who examines us with a stethoscope and gives medicine when sick? 🩺",
+            "questionHindi": "बीमार होने पर स्टेथोस्कोप से जांच करके हमें दवा कौन देता है? 🩺",
+            "visual": "🩺 👩‍⚕️",
+            "options": [
+              "Doctor (डॉक्टर) 🩺",
+              "Pilot (पायलट) 👨‍✈️",
+              "Tailor (दर्जी) 🧵",
+              "Chef (बावर्ची) 👨‍🍳"
+            ],
+            "correctAnswer": "Doctor (डॉक्टर) 🩺",
+            "explanationEnglish": "Doctors and nurses take care of our health when we fall sick.",
+            "explanationHindi": "डॉक्टर हमारे स्वास्थ्य की देखभाल और इलाज करते हैं।"
+          },
+          {
+            "questionEnglish": "Who helps children learn alphabets, numbers, and good values in school? 👩‍🏫",
+            "questionHindi": "स्कूल में बच्चों को पढ़ाई-लिखाई और अच्छी आदतें कौन सिखाते हैं? 👩‍🏫",
+            "visual": "📚 👩‍🏫 🏫",
+            "options": [
+              "Teacher (अध्यापक/शिक्षिका) 👩‍🏫",
+              "Driver (चालक) 🚌",
+              "Mason (राजमिस्त्री) 🧱",
+              "Plumber (प्लम्बर) 🔧"
+            ],
+            "correctAnswer": "Teacher (अध्यापक/शिक्षिका) 👩‍🏫",
+            "explanationEnglish": "Teachers shape young minds with love and knowledge!",
+            "explanationHindi": "शिक्षक हमें ज्ञान और अच्छे संस्कार देते हैं।"
+          }
+        ]
+      }
+    ]
+  },
+  "class-2": {
+    "scienceTopics": [
+      {
+        "id": "class2-sci-1",
+        "titleEnglish": "Internal Organs of Human Body (मानव शरीर के अंग)",
+        "titleHindi": "शरीर के महत्वपूर्ण आंतरिक अंग",
+        "descriptionEnglish": "Learn about Heart, Lungs, Brain, Stomach and how they work.",
+        "descriptionHindi": "हृदय, फेफड़े, मस्तिष्क और पेट के कार्य।",
+        "icon": "🫀",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Heart: Pumps blood ❤️",
+            "hindi": "हृदय: रक्त संचार करता है"
+          },
+          {
+            "english": "Lungs: Breath oxygen 🫁",
+            "hindi": "फेफड़े: सांस लेने में मदद"
+          },
+          {
+            "english": "Brain: Master computer 🧠",
+            "hindi": "मस्तिष्क: सोचना व नियंत्रण"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which organ inside our chest continuously pumps blood to all body parts? ❤️",
+            "questionHindi": "हमारी छाती में कौन सा अंग दिन-रात रक्त (blood) पंप करता रहता है? ❤️",
+            "visual": "❤️ 🩸 🫀",
+            "options": [
+              "Heart (हृदय/दिल) 🫀",
+              "Stomach (आमाशय/पेट) 🫄",
+              "Lungs (फेफड़े) 🫁",
+              "Kidney (गुर्दा)"
+            ],
+            "correctAnswer": "Heart (हृदय/दिल) 🫀",
+            "explanationEnglish": "The heart beats over 100,000 times a day to circulate blood!",
+            "explanationHindi": "हृदय पूरे शरीर में निरंतर रक्त का संचार करता है।"
+          },
+          {
+            "questionEnglish": "Which pair of organs expand like balloons when we breathe in fresh air? 🫁",
+            "questionHindi": "जब हम ताजी हवा अंदर खींचते हैं, तो गुब्बारे की तरह कौन से अंग फूलते हैं? 🫁",
+            "visual": "🫁 🌬️ 🫁",
+            "options": [
+              "Lungs (फेफड़े) 🫁",
+              "Liver (यकृत)",
+              "Bones (हड्डियां) 🦴",
+              "Skin (त्वचा)"
+            ],
+            "correctAnswer": "Lungs (फेफड़े) 🫁",
+            "explanationEnglish": "Lungs take in oxygen from air and release carbon dioxide.",
+            "explanationHindi": "फेफड़े हवा से ऑक्सीजन लेकर खून में पहुंचाते हैं।"
+          },
+          {
+            "questionEnglish": "Which super organ is safely protected inside our hard skull and controls thinking? 🧠",
+            "questionHindi": "खोपड़ी के अंदर सुरक्षित कौन सा अंग सोचने, याद रखने और शरीर को निर्देश देने का काम करता है? 🧠",
+            "visual": "🧠 💡 💭",
+            "options": [
+              "Brain (मस्तिष्क/दिमाग) 🧠",
+              "Nose (नाक) 👃",
+              "Tongue (जीभ) 👅",
+              "Ear (कान) 👂"
+            ],
+            "correctAnswer": "Brain (मस्तिष्क/दिमाग) 🧠",
+            "explanationEnglish": "The brain is the master computer of our entire body!",
+            "explanationHindi": "दिमाग हमारे पूरे शरीर को नियंत्रित करता है।"
+          }
+        ]
+      },
+      {
+        "id": "class2-sci-2",
+        "titleEnglish": "Animal Habitats & Eating Habits (जानवरों के भोजन व आवास)",
+        "titleHindi": "जानवरों के आहार व उनके प्राकृतिक आवास",
+        "descriptionEnglish": "Understand Herbivores, Carnivores, Omnivores, and where animals live.",
+        "descriptionHindi": "शाकाहारी, मांसाहारी व सर्वाहारी जीवों की विशेषताएं।",
+        "icon": "🦁",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Herbivore: Plants only (Deer, Cow) 🌿",
+            "hindi": "शाकाहारी: केवल पौधे"
+          },
+          {
+            "english": "Carnivore: Meat eaters (Lion, Tiger) 🥩",
+            "hindi": "मांसाहारी: केवल मांस"
+          },
+          {
+            "english": "Omnivore: Both plants & meat (Bear, Crow) 🍱",
+            "hindi": "सर्वाहारी: पौधे व मांस दोनों"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Animals that eat ONLY plants, fruits, and green grass are known as? 🌿",
+            "questionHindi": "जो जानवर केवल पेड़-पौधे, पत्तियां और हरी घास खाते हैं, वे क्या कहलाते हैं? 🌿",
+            "visual": "🦌 🌿 🐮",
+            "options": [
+              "Herbivores (शाकाहारी) 🌿",
+              "Carnivores (मांसाहारी) 🥩",
+              "Insectivores",
+              "Aquatic"
+            ],
+            "correctAnswer": "Herbivores (शाकाहारी) 🌿",
+            "explanationEnglish": "Cows, elephants, and deer are herbivores because they eat only plants.",
+            "explanationHindi": "पौधे खाने वाले जीव शाकाहारी (Herbivores) कहलाते हैं।"
+          },
+          {
+            "questionEnglish": "Which amphibian animal can breathe and live both in water and on land? 🐸",
+            "questionHindi": "कौन सा जीव जल और थल (जमीन) दोनों पर आसानी से रह सकता है? 🐸",
+            "visual": "🐸 💧 🍃",
+            "options": [
+              "Frog (मेंढक) 🐸",
+              "Fish (मछली) 🐟",
+              "Monkey (बंदर) 🐒",
+              "Eagle (चील) 🦅"
+            ],
+            "correctAnswer": "Frog (मेंढक) 🐸",
+            "explanationEnglish": "Frogs are amphibians—they swim in water and hop on land!",
+            "explanationHindi": "मेंढक उभयचर (Amphibian) है जो पानी और जमीन दोनों पर रहता है।"
+          }
+        ]
+      }
+    ],
+    "gkTopics": [
+      {
+        "id": "class2-gk-1",
+        "titleEnglish": "India: Capital, Rivers & Famous Places (भारत दर्शन)",
+        "titleHindi": "भारत की राजधानी, पवित्र नदियाँ व प्रसिद्ध स्थल",
+        "descriptionEnglish": "Learn India's capital New Delhi, holy river Ganga, and famous monuments.",
+        "descriptionHindi": "नई दिल्ली, गंगा नदी, हिमालय और ऐतिहासिक इमारतों का ज्ञान।",
+        "icon": "🏛️",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Capital of India = New Delhi 🏛️",
+            "hindi": "भारत की राजधानी = नई दिल्ली"
+          },
+          {
+            "english": "Longest River = Ganga 🌊",
+            "hindi": "सबसे लंबी नदी = गंगा"
+          },
+          {
+            "english": "Highest Mountains = Himalayas 🏔️",
+            "hindi": "सर्वोच्च पर्वतमाला = हिमालय"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "What is the official capital city of our country India? 🏛️",
+            "questionHindi": "हमारे देश भारत की आधिकारिक राजधानी कौन सा शहर है? 🏛️",
+            "visual": "🏛️ 🇮🇳",
+            "options": [
+              "New Delhi (नई दिल्ली) 🏛️",
+              "Mumbai (मुंबई)",
+              "Kolkata (कोलकाता)",
+              "Bengaluru (बेंगलुरु)"
+            ],
+            "correctAnswer": "New Delhi (नई दिल्ली) 🏛️",
+            "explanationEnglish": "New Delhi is the national capital of India where Parliament is located.",
+            "explanationHindi": "नई दिल्ली भारत की राजधानी है।"
+          },
+          {
+            "questionEnglish": "Which is the longest and most revered holy river in India? 🌊",
+            "questionHindi": "भारत की सबसे लंबी और सबसे पवित्र मानी जाने वाली नदी कौन सी है? 🌊",
+            "visual": "🌊 🏔️",
+            "options": [
+              "River Ganga (गंगा नदी) 🌊",
+              "River Yamuna (यमुना)",
+              "River Kaveri (कावेरी)",
+              "River Narmada (नर्मदा)"
+            ],
+            "correctAnswer": "River Ganga (गंगा नदी) 🌊",
+            "explanationEnglish": "River Ganga originates from Gangotri glacier in Himalayas and flows over 2,525 km.",
+            "explanationHindi": "गंगा भारत की सबसे लंबी और प्रमुख नदी है।"
+          },
+          {
+            "questionEnglish": "In which historic city of Uttar Pradesh is the world-famous white marble Taj Mahal? 🏰",
+            "questionHindi": "सफेद संगमरमर से बना विश्वप्रसिद्ध ताजमहल उत्तर प्रदेश के किस शहर में है? 🏰",
+            "visual": "🏰 🕌",
+            "options": [
+              "Agra (आगरा) 🏰",
+              "Jaipur (जयपुर)",
+              "Varanasi (वाराणसी)",
+              "Lucknow (लखनऊ)"
+            ],
+            "correctAnswer": "Agra (आगरा) 🏰",
+            "explanationEnglish": "The Taj Mahal is located on the banks of river Yamuna in Agra.",
+            "explanationHindi": "ताजमहल आगरा शहर में यमुना नदी के तट पर स्थित है।"
+          }
+        ]
+      },
+      {
+        "id": "class2-gk-2",
+        "titleEnglish": "Festivals of India (भारत के प्रमुख त्योहार)",
+        "titleHindi": "भारत के रंग-बिरंगे त्योहार व उत्सव",
+        "descriptionEnglish": "Celebrate Diwali, Eid, Christmas, Holi, and National festivals.",
+        "descriptionHindi": "दीपावली, होली, ईद, क्रिसमस और राष्ट्रीय पर्व।",
+        "icon": "🪔",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Diwali = Festival of Lights 🪔",
+            "hindi": "दीपावली = दीपों का पर्व"
+          },
+          {
+            "english": "Holi = Festival of Colors 🎨",
+            "hindi": "होली = रंगों का पर्व"
+          },
+          {
+            "english": "Independence Day = 15th August 🇮🇳",
+            "hindi": "स्वतंत्रता दिवस = १५ अगस्त"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which joyful festival is celebrated with glowing earthen lamps (diyas) and sweets? 🪔",
+            "questionHindi": "दीपक जलाने, घरों को सजाने और मिठाइयाँ बांटने का रोशनी वाला त्योहार कौन सा है? 🪔",
+            "visual": "🪔 ✨ 🎆",
+            "options": [
+              "Diwali (दीपावली) 🪔",
+              "Holi (होली) 🎨",
+              "Eid (ईद) 🌙",
+              "Christmas (क्रिसमस) 🎄"
+            ],
+            "correctAnswer": "Diwali (दीपावली) 🪔",
+            "explanationEnglish": "Diwali celebrates the victory of light over darkness and good over evil.",
+            "explanationHindi": "दीपावली दीपों और प्रकाश का पावन त्योहार है।"
+          },
+          {
+            "questionEnglish": "On which date does India proudly celebrate its Independence Day every year? 🇮🇳",
+            "questionHindi": "हर साल भारत किस तारीख को अपना स्वतंत्रता दिवस (Independence Day) मनाता है? 🇮🇳",
+            "visual": "🇮🇳 🕊️ 🎖️",
+            "options": [
+              "15th August (१५ अगस्त) 🇮🇳",
+              "26th January (२६ जनवरी)",
+              "2nd October (२ अक्टूबर)",
+              "14th November (१४ नवंबर)"
+            ],
+            "correctAnswer": "15th August (१५ अगस्त) 🇮🇳",
+            "explanationEnglish": "India gained independence on 15th August 1947.",
+            "explanationHindi": "भारत १५ अगस्त १९४७ को स्वतंत्र हुआ था।"
+          }
+        ]
+      }
+    ]
+  },
+  "class-3": {
+    "scienceTopics": [
+      {
+        "id": "class3-sci-1",
+        "titleEnglish": "States of Matter: Solid, Liquid & Gas (पदार्थ की अवस्थाएँ)",
+        "titleHindi": "ठोस, द्रव और गैस: पदार्थ के तीन रूप",
+        "descriptionEnglish": "Understand how ice melts into water and boils into steam (matter states).",
+        "descriptionHindi": "बर्फ (ठोस), जल (द्रव) और वाष्प (गैस) में रूपांतरण व गुण।",
+        "icon": "🧊",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Solid: Fixed shape & volume (Ice) 🧊",
+            "hindi": "ठोस: निश्चित आकार व आयतन"
+          },
+          {
+            "english": "Liquid: Takes container shape (Water) 💧",
+            "hindi": "द्रव: बर्तन का आकार लेता है"
+          },
+          {
+            "english": "Gas: Fills all available space (Steam) ♨️",
+            "hindi": "गैस: हर जगह फैल जाती है"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Ice is water in which fundamental state of matter? 🧊",
+            "questionHindi": "बर्फ (Ice) पानी की किस भौतिक अवस्था का रूप है? 🧊",
+            "visual": "🧊 ❄️ 💧",
+            "options": [
+              "Solid (ठोस अवस्था) 🧊",
+              "Liquid (तरल/द्रव)",
+              "Gas (गैस अवस्था)",
+              "Plasma"
+            ],
+            "correctAnswer": "Solid (ठोस अवस्था) 🧊",
+            "explanationEnglish": "Ice has a fixed shape and fixed volume, making it a solid.",
+            "explanationHindi": "बर्फ एक ठोस (Solid) है जो 0°C पर पानी के जमने से बनती है।"
+          },
+          {
+            "questionEnglish": "When water is boiled and turns into invisible steam/vapor, what is this process called? ♨️",
+            "questionHindi": "जब पानी को उबालने पर वह भाप या वाष्प में बदल जाता है, तो इस प्रक्रिया को क्या कहते हैं? ♨️",
+            "visual": "♨️ 💧 💨",
+            "options": [
+              "Evaporation (वाष्पीकरण) ♨️",
+              "Freezing (जमना) ❄️",
+              "Melting (पिघलना)",
+              "Sublimation"
+            ],
+            "correctAnswer": "Evaporation (वाष्पीकरण) ♨️",
+            "explanationEnglish": "Evaporation is the change of liquid water into gaseous water vapor.",
+            "explanationHindi": "पानी का वाष्प में बदलना वाष्पीकरण (Evaporation) कहलाता है।"
+          },
+          {
+            "questionEnglish": "Which state of matter has NO fixed shape and flows to take the shape of any bottle? 💧",
+            "questionHindi": "पदार्थ की कौन सी अवस्था का कोई निश्चित आकार नहीं होता और जिस बर्तन में डालें उसी का आकार ले लेती है? 💧",
+            "visual": "🥛 🫗 💧",
+            "options": [
+              "Liquid (तरल/द्रव) 💧",
+              "Solid (ठोस) 🪵",
+              "Stone (पत्थर) 🪨",
+              "Iron Rod (लोहा)"
+            ],
+            "correctAnswer": "Liquid (तरल/द्रव) 💧",
+            "explanationEnglish": "Liquids like milk, juice, and water take the shape of their container.",
+            "explanationHindi": "द्रव (Liquid) का आयतन निश्चित होता है पर आकार बर्तन अनुसार बदलता है।"
+          }
+        ]
+      },
+      {
+        "id": "class3-sci-2",
+        "titleEnglish": "Plant Life Cycle & Photosynthesis (प्रकाश संश्लेषण)",
+        "titleHindi": "पौधों का जीवन चक्र व भोजन निर्माण",
+        "descriptionEnglish": "How green leaves act as food factories using sunlight, water, and CO2.",
+        "descriptionHindi": "पत्तियों में क्लोरोफिल और सूर्य के प्रकाश से भोजन बनना।",
+        "icon": "🌿",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Chlorophyll = Green pigment 🍃",
+            "hindi": "क्लोरोफिल = हरा वर्णक"
+          },
+          {
+            "english": "Photosynthesis = Sunlight + Water + CO2 ☀️",
+            "hindi": "प्रकाश संश्लेषण = धूप + जल + कार्बन डाइऑक्साइड"
+          },
+          {
+            "english": "Output = Oxygen for humans to breathe 🌬️",
+            "hindi": "उत्पाद = सांस लेने योग्य ऑक्सीजन"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "What magical natural green pigment in leaves helps them capture sunlight for food? 🍃",
+            "questionHindi": "पत्तियों में कौन सा प्राकृतिक हरा वर्णक होता है जो धूप को सोखकर भोजन बनाने में मदद करता है? 🍃",
+            "visual": "🍃 ☀️ 🧪",
+            "options": [
+              "Chlorophyll (क्लोरोफिल) 🍃",
+              "Hemoglobin (हीमोग्लोबिन)",
+              "Melanin",
+              "Keratin"
+            ],
+            "correctAnswer": "Chlorophyll (क्लोरोफिल) 🍃",
+            "explanationEnglish": "Chlorophyll absorbs sunlight energy to produce glucose for the plant.",
+            "explanationHindi": "क्लोरोफिल के कारण ही पत्तियों का रंग हरा होता है।"
+          },
+          {
+            "questionEnglish": "What vital gas do plants release into the air during daytime that humans and animals breathe? 🌬️",
+            "questionHindi": "प्रकाश संश्लेषण के दौरान पौधे दिन में कौन सी जीवनदायिनी गैस छोड़ते हैं जो हम सांस में लेते हैं? 🌬️",
+            "visual": "🌱 ➡️ 🌬️ 🫁",
+            "options": [
+              "Oxygen (ऑक्सीजन) 🌬️",
+              "Carbon Dioxide (CO2)",
+              "Nitrogen Gas",
+              "Helium"
+            ],
+            "correctAnswer": "Oxygen (ऑक्सीजन) 🌬️",
+            "explanationEnglish": "Plants inhale carbon dioxide and exhale fresh oxygen for our survival!",
+            "explanationHindi": "पौधे हमें सांस लेने के लिए शुद्ध ऑक्सीजन देते हैं।"
+          }
+        ]
+      },
+      {
+        "id": "class3-sci-3",
+        "titleEnglish": "Birds: Beaks, Feathers & Flight (पक्षियों की दुनिया)",
+        "titleHindi": "पक्षियों की चोंच, पंख और घोंसले",
+        "descriptionEnglish": "Discover how bird beaks differ based on food: hummingbirds, eagles, ducks.",
+        "descriptionHindi": "विभिन्न पक्षियों की चोंच, पंजों और उनके जीवन के रहस्य।",
+        "icon": "🦅",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Eagle = Hooked beak for meat 🦅",
+            "hindi": "चील = मांस चीरने वाली चोंच"
+          },
+          {
+            "english": "Duck = Broad flat beak with holes 🦆",
+            "hindi": "बतख = कीचड़ छानने वाली चौड़ी चोंच"
+          },
+          {
+            "english": "Penguin = Flightless bird & fast swimmer 🐧",
+            "hindi": "पेंगुइन = न उड़ने वाला जलीय पक्षी"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which unique bird cannot fly in the sky, but is an expert deep-water swimmer? 🐧",
+            "questionHindi": "कौन सा अनोखा पक्षी आसमान में नहीं उड़ सकता लेकिन ठंडे बर्फीले पानी में सबसे तेज तैरता है? 🐧",
+            "visual": "🐧 ❄️ 🌊",
+            "options": [
+              "Penguin (पेंगुइन) 🐧",
+              "Pigeon (कबूतर) 🕊️",
+              "Sparrow (गौरैया) 🐦",
+              "Crow (कौआ) 🦅"
+            ],
+            "correctAnswer": "Penguin (पेंगुइन) 🐧",
+            "explanationEnglish": "Penguins use their flipper wings to swim underwater at incredible speeds!",
+            "explanationHindi": "पेंगुइन उड़ नहीं सकता, पर पानी में गजब की तैराकी करता है।"
+          },
+          {
+            "questionEnglish": "Which nocturnal bird can rotate its head almost 270 degrees and hunts silently at night? 🦉",
+            "questionHindi": "कौन सा बुद्धिमान निशाचर पक्षी अपनी गर्दन को २७० डिग्री तक घुमा सकता है और रात में शिकार करता है? 🦉",
+            "visual": "🦉 🌙 🌲",
+            "options": [
+              "Owl (उल्लू) 🦉",
+              "Duck (बतख) 🦆",
+              "Parrot (तोता) 🦜",
+              "Hen (मुर्गी) 🐔"
+            ],
+            "correctAnswer": "Owl (उल्लू) 🦉",
+            "explanationEnglish": "Owls have large eyes with night vision and can swivel their necks far around!",
+            "explanationHindi": "उल्लू रात में बहुत साफ देख सकता है और अपनी गर्दन घुमा सकता है।"
+          }
+        ]
+      }
+    ],
+    "gkTopics": [
+      {
+        "id": "class3-gk-1",
+        "titleEnglish": "The Solar System & 8 Planets (हमारा सौरमंडल)",
+        "titleHindi": "सौरमंडल और अंतरिक्ष के ८ ग्रह",
+        "descriptionEnglish": "Tour Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.",
+        "descriptionHindi": "सूर्य और आठों ग्रहों के नाम, उपग्रह व अंतरिक्ष रहस्य।",
+        "icon": "🪐",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Earth = The Blue Planet 🌍",
+            "hindi": "पृथ्वी = नीला ग्रह (जीवन)"
+          },
+          {
+            "english": "Mars = The Red Planet 🔴",
+            "hindi": "मंगल = लाल ग्रह"
+          },
+          {
+            "english": "Jupiter = Largest Planet 🪐",
+            "hindi": "बृहस्पति = सबसे विशाल ग्रह"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which neighboring planet is known as the 'Red Planet' due to rusty iron soil? 🪐",
+            "questionHindi": "मिट्टी में जंग लगे लोहे के कारण किस पड़ोसी ग्रह को 'लाल ग्रह' (Red Planet) कहा जाता है? 🪐",
+            "visual": "🔴 🪐 🚀",
+            "options": [
+              "Mars (मंगल ग्रह) 🪐",
+              "Venus (शुक्र)",
+              "Mercury (बुध)",
+              "Jupiter (बृहस्पति)"
+            ],
+            "correctAnswer": "Mars (मंगल ग्रह) 🪐",
+            "explanationEnglish": "Mars looks reddish in the night sky because its surface is covered in iron oxide.",
+            "explanationHindi": "मंगल ग्रह को 'लाल ग्रह' कहा जाता है।"
+          },
+          {
+            "questionEnglish": "Which is the largest giant planet in our entire solar system? 🪐",
+            "questionHindi": "हमारे पूरे सौरमंडल का सबसे बड़ा और विशालकाय ग्रह कौन सा है? 🪐",
+            "visual": "🪐 ☀️ 🌍",
+            "options": [
+              "Jupiter (बृहस्पति) 🪐",
+              "Saturn (शनि)",
+              "Earth (पृथ्वी) 🌍",
+              "Neptune (वरुण)"
+            ],
+            "correctAnswer": "Jupiter (बृहस्पति) 🪐",
+            "explanationEnglish": "Jupiter is so massive that more than 1,300 Earths could fit inside it!",
+            "explanationHindi": "बृहस्पति (Jupiter) सौरमंडल का सबसे बड़ा ग्रह है।"
+          },
+          {
+            "questionEnglish": "How many officially recognized planets orbit around our central star, the Sun? ☀️",
+            "questionHindi": "हमारे सौरमंडल में सूर्य की परिक्रमा करने वाले कितने मुख्य ग्रह हैं? ☀️",
+            "visual": "☀️ 🪐 🌍",
+            "options": [
+              "8 Planets (८ ग्रह)",
+              "9 Planets",
+              "7 Planets",
+              "12 Planets"
+            ],
+            "correctAnswer": "8 Planets (८ ग्रह)",
+            "explanationEnglish": "There are 8 planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.",
+            "explanationHindi": "सौरमंडल में कुल ८ ग्रह हैं।"
+          }
+        ]
+      },
+      {
+        "id": "class3-gk-2",
+        "titleEnglish": "Great Inventions & Discoveries (महान आविष्कार)",
+        "titleHindi": "मानव इतिहास के महान आविष्कारक",
+        "descriptionEnglish": "Learn who invented the Light Bulb, Telephone, Airplane, and Computer.",
+        "descriptionHindi": "बल्ब, टेलीफोन, हवाई जहाज और कंप्यूटर के जनक।",
+        "icon": "💡",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Light Bulb = Thomas Edison 💡",
+            "hindi": "विद्युत बल्ब = थॉमस एडिसन"
+          },
+          {
+            "english": "Telephone = Alexander Graham Bell ☎️",
+            "hindi": "टेलीफोन = ग्राहम बेल"
+          },
+          {
+            "english": "Airplane = Wright Brothers ✈️",
+            "hindi": "हवाई जहाज = राइट ब्रदर्स"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which persistent inventor created the practical long-lasting electric light bulb? 💡",
+            "questionHindi": "किस महान वैज्ञानिक ने दुनिया को रोशन करने वाले बिजली के बल्ब का आविष्कार किया था? 💡",
+            "visual": "💡 ⚡ 🧑‍🔬",
+            "options": [
+              "Thomas Edison 💡",
+              "Albert Einstein",
+              "Isaac Newton",
+              "Charles Darwin"
+            ],
+            "correctAnswer": "Thomas Edison 💡",
+            "explanationEnglish": "Thomas Alva Edison tested thousands of materials before perfecting the carbon filament bulb!",
+            "explanationHindi": "थॉमस अल्वा एडिसन ने इलेक्ट्रिक बल्ब का आविष्कार किया था।"
+          },
+          {
+            "questionEnglish": "Who invented the first practical telephone that allowed people to talk across distances? ☎️",
+            "questionHindi": "दूर बैठे लोगों से आवाज में बात करने वाले पहले टेलीफोन का आविष्कार किसने किया था? ☎️",
+            "visual": "☎️ 📞 🧑‍🔬",
+            "options": [
+              "Alexander Graham Bell ☎️",
+              "Wright Brothers ✈️",
+              "Galileo Galilei 🔭",
+              "Guglielmo Marconi 📻"
+            ],
+            "correctAnswer": "Alexander Graham Bell ☎️",
+            "explanationEnglish": "Alexander Graham Bell patented the telephone in 1876!",
+            "explanationHindi": "ग्राहम बेल ने १८७६ में टेलीफोन का आविष्कार किया था।"
+          }
+        ]
+      },
+      {
+        "id": "class3-gk-3",
+        "titleEnglish": "Monuments & Wonders of World (विश्व धरोहर व स्मारक)",
+        "titleHindi": "भारत और विश्व के प्रसिद्ध आश्चर्य",
+        "descriptionEnglish": "Explore Taj Mahal, Qutub Minar, Statue of Unity, and Great Wall of China.",
+        "descriptionHindi": "ताजमहल, कुतुबमीनार, स्टैच्यू ऑफ यूनिटी और चीन की दीवार।",
+        "icon": "🗽",
+        "difficulty": "Intermediate",
+        "keyConcepts": [
+          {
+            "english": "Statue of Unity = 182 meters tall (Gujarat) 🗽",
+            "hindi": "स्टैच्यू ऑफ यूनिटी = विश्व की सबसे ऊंची प्रतिमा"
+          },
+          {
+            "english": "Qutub Minar = Tallest brick minaret (Delhi) 🗼",
+            "hindi": "कुतुब मीनार = दिल्ली की ऐतिहासिक मीनार"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which breathtaking monument in Gujarat is the TALLEST statue in the world (182m)? 🗽",
+            "questionHindi": "गुजरात में स्थित सरदार पटेल जी की कौन सी प्रतिमा विश्व की सबसे ऊंची प्रतिमा (१८२ मीटर) है? 🗽",
+            "visual": "🗽 🇮🇳 ⛰️",
+            "options": [
+              "Statue of Unity (स्टैच्यू ऑफ यूनिटी) 🗽",
+              "Statue of Liberty (अमेरिका)",
+              "Spring Temple Buddha",
+              "Eiffel Tower"
+            ],
+            "correctAnswer": "Statue of Unity (स्टैच्यू ऑफ यूनिटी) 🗽",
+            "explanationEnglish": "The Statue of Unity honors Sardar Vallabhbhai Patel and is 182 meters high!",
+            "explanationHindi": "स्टैच्यू ऑफ यूनिटी विश्व की सबसे ऊंची प्रतिमा है।"
+          },
+          {
+            "questionEnglish": "Which massive ancient stone wall stretches thousands of miles across mountains in Asia? 🧱",
+            "questionHindi": "हजारों किलोमीटर लंबी कौन सी ऐतिहासिक दीवार पहाड़ियों पर बनी है और अंतरिक्ष से भी पहचानी जाती है? 🧱",
+            "visual": "🧱 🏔️ 🇨🇳",
+            "options": [
+              "Great Wall of China (चीन की विशाल दीवार) 🧱",
+              "Berlin Wall",
+              "Western Wall",
+              "Hadrian's Wall"
+            ],
+            "correctAnswer": "Great Wall of China (चीन की विशाल दीवार) 🧱",
+            "explanationEnglish": "The Great Wall of China is over 13,000 miles long and built across centuries.",
+            "explanationHindi": "चीन की महान दीवार प्राचीन काल में सीमाओं की रक्षा के लिए बनाई गई थी।"
+          }
+        ]
+      }
+    ]
+  },
+  "class-4-5": {
+    "scienceTopics": [
+      {
+        "id": "class45-sci-1",
+        "titleEnglish": "Force, Gravity & Simple Machines (बल, गुरुत्वाकर्षण व मशीनें)",
+        "titleHindi": "गुरुत्वाकर्षण बल, घर्षण व सरल यांत्रिकी",
+        "descriptionEnglish": "Understand gravity pulling objects down, friction stopping motion, and levers.",
+        "descriptionHindi": "पृथ्वी का खिंचाव, घर्षण बल और उत्तोलक व घिरनी के नियम।",
+        "icon": "⚙️",
+        "difficulty": "Advanced",
+        "keyConcepts": [
+          {
+            "english": "Gravity: Earth pulls all masses downwards 🌍",
+            "hindi": "गुरुत्वाकर्षण: पृथ्वी हर वस्तु को नीचे खींचती है"
+          },
+          {
+            "english": "Friction: Opposes relative motion ⛸️",
+            "hindi": "घर्षण: गति का विरोध करने वाला बल"
+          },
+          {
+            "english": "Simple Machines: Levers, Pulleys, Inclined Planes 🪓",
+            "hindi": "सरल मशीनें: कार्य आसान बनाती हैं"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "When an apple falls off a tree branch, which invisible force pulls it straight to the ground? 🍎",
+            "questionHindi": "जब पेड़ से सेब टूटता है, तो किस अदृश्य बल के कारण वह सीधे जमीन पर नीचे गिरता है? 🍎",
+            "visual": "🍎 ⬇️ 🌍",
+            "options": [
+              "Gravitational Force (गुरुत्वाकर्षण बल) 🌍",
+              "Magnetic Attraction",
+              "Electrostatic Force",
+              "Wind Resistance"
+            ],
+            "correctAnswer": "Gravitational Force (गुरुत्वाकर्षण बल) 🌍",
+            "explanationEnglish": "Sir Isaac Newton discovered gravity, which pulls everything toward Earth's center.",
+            "explanationHindi": "गुरुत्वाकर्षण बल (Gravity) हर वस्तु को पृथ्वी के केंद्र की ओर खींचता है।"
+          },
+          {
+            "questionEnglish": "Why is it very difficult to walk on wet polished ice without slipping? ⛸️",
+            "questionHindi": "गीली चिकनी बर्फ पर बिना फिसले चलना इतना कठिन क्यों होता है? ⛸️",
+            "visual": "⛸️ ❄️ 🦶",
+            "options": [
+              "Very low frictional force (घर्षण बल बहुत कम होता है)",
+              "High air density",
+              "High gravitational pull",
+              "Extreme magnetism"
+            ],
+            "correctAnswer": "Very low frictional force (घर्षण बल बहुत कम होता है)",
+            "explanationEnglish": "Friction provides the grip between shoes and ground; smooth ice has almost zero friction!",
+            "explanationHindi": "बर्फ पर घर्षण (Friction) बहुत कम होने से पैर फिसल जाते हैं।"
+          },
+          {
+            "questionEnglish": "Which simple machine uses a grooved wheel and a rope to lift heavy water buckets from a well? 🪣",
+            "questionHindi": "कुएं से पानी की भारी बाल्टी खींचने के लिए पहिए और रस्सी वाली कौन सी सरल मशीन काम आती है? 🪣",
+            "visual": "🪢 🛞 🪣",
+            "options": [
+              "Pulley (घिरनी) 🛞",
+              "Wedge (कुल्हाड़ी की धार)",
+              "Screw (पेंच)",
+              "Lever Type 3"
+            ],
+            "correctAnswer": "Pulley (घिरनी) 🛞",
+            "explanationEnglish": "A pulley changes the direction of force, making lifting heavy loads much easier.",
+            "explanationHindi": "घिरनी (Pulley) से दिशा बदलकर भारी वजन आसानी से ऊपर खींचा जाता है।"
+          }
+        ]
+      },
+      {
+        "id": "class45-sci-2",
+        "titleEnglish": "Ecosystems, Food Webs & Blood (पारिस्थितिकी व रक्त परिसंचरण)",
+        "titleHindi": "खाद्य श्रृंखला व मानव रक्त कोशिकाएं",
+        "descriptionEnglish": "Understand food chains, producers, consumers, and how WBCs fight diseases.",
+        "descriptionHindi": "उत्पादक, उपभोक्ता, अपघटक और श्वेत रक्त कणिकाओं की रक्षा प्रणाली।",
+        "icon": "🔬",
+        "difficulty": "Advanced",
+        "keyConcepts": [
+          {
+            "english": "Producers = Green plants making food 🌿",
+            "hindi": "उत्पादक = हरे पौधे जो भोजन बनाते हैं"
+          },
+          {
+            "english": "Consumers = Animals eating plants/meat 🦁",
+            "hindi": "उपभोक्ता = जीव जो अन्य पर निर्भर हैं"
+          },
+          {
+            "english": "White Blood Cells = Body's soldier army 🛡️",
+            "hindi": "श्वेत रक्त कणिकाएं = रोगों से लड़ने वाले सैनिक"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which cells in our bloodstream act like brave soldiers to fight bacteria and viruses? 🛡️",
+            "questionHindi": "हमारे खून में कौन सी कोशिकाएं वीर सैनिकों की तरह बैक्टीरिया और बीमारियों से लड़ती हैं? 🛡️",
+            "visual": "🛡️ 🩸 🦠",
+            "options": [
+              "White Blood Cells / WBC (श्वेत रक्त कणिकाएं) 🛡️",
+              "Red Blood Cells / RBC 🔴",
+              "Platelets (प्लेटलेट्स)",
+              "Skin Cells"
+            ],
+            "correctAnswer": "White Blood Cells / WBC (श्वेत रक्त कणिकाएं) 🛡️",
+            "explanationEnglish": "WBCs produce antibodies to destroy harmful germs and protect our immunity!",
+            "explanationHindi": "WBC शरीर की रोग प्रतिरोधक क्षमता (Immunity) की रक्षा करती हैं।"
+          },
+          {
+            "questionEnglish": "In an ecological food chain: Grass ➔ Deer ➔ Tiger, what is the role of the Grass? 🌾",
+            "questionHindi": "खाद्य श्रृंखला: घास ➔ हिरण ➔ बाघ में हरी घास की क्या भूमिका है? 🌾",
+            "visual": "🌾 🦌 🐅",
+            "options": [
+              "Producer (उत्पादक) 🌾",
+              "Secondary Consumer",
+              "Carnivore Predator",
+              "Decomposer"
+            ],
+            "correctAnswer": "Producer (उत्पादक) 🌾",
+            "explanationEnglish": "Plants are Producers because they manufacture energy directly from sunlight.",
+            "explanationHindi": "हरे पौधे स्वयं भोजन बनाते हैं इसलिए उन्हें 'उत्पादक' (Producer) कहते हैं।"
+          }
+        ]
+      }
+    ],
+    "gkTopics": [
+      {
+        "id": "class45-gk-1",
+        "titleEnglish": "World Geography: Continents & Oceans (विश्व भूगोल)",
+        "titleHindi": "महाद्वीप, महासागर व विश्व के भौगोलिक अजूबे",
+        "descriptionEnglish": "Explore 7 continents, 5 oceans, Pacific deep trench, and Sahara desert.",
+        "descriptionHindi": "७ महाद्वीप, ५ महासागर, प्रशांत महासागर और सहारा रेगिस्तान।",
+        "icon": "🌏",
+        "difficulty": "Advanced",
+        "keyConcepts": [
+          {
+            "english": "Largest Continent = Asia 🌏",
+            "hindi": "सबसे बड़ा महाद्वीप = एशिया"
+          },
+          {
+            "english": "Largest Ocean = Pacific Ocean 🌊",
+            "hindi": "सबसे बड़ा महासागर = प्रशांत"
+          },
+          {
+            "english": "Largest Desert = Sahara Desert 🐪",
+            "hindi": "सबसे बड़ा गर्म मरुस्थल = सहारा"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Which is the largest continent in the world, covering 30% of Earth's land area? 🌏",
+            "questionHindi": "क्षेत्रफल और जनसंख्या दोनों में विश्व का सबसे बड़ा महाद्वीप कौन सा है जिसमें भारत भी स्थित है? 🌏",
+            "visual": "🌏 🗺️ 🇮🇳",
+            "options": [
+              "Asia (एशिया) 🌏",
+              "Africa (अफ्रीका)",
+              "Europe (यूरोप)",
+              "North America (उत्तरी अमेरिका)"
+            ],
+            "correctAnswer": "Asia (एशिया) 🌏",
+            "explanationEnglish": "Asia is the largest continent with over 4.7 billion people and 48 countries.",
+            "explanationHindi": "एशिया पृथ्वी का सबसे बड़ा महाद्वीप है।"
+          },
+          {
+            "questionEnglish": "Which is the deepest and largest ocean on planet Earth, covering more area than all land? 🌊",
+            "questionHindi": "पृथ्वी का सबसे बड़ा और सबसे गहरा महासागर कौन सा है जिसमें मारियाना ट्रेंच स्थित है? 🌊",
+            "visual": "🌊 🐋 🏝️",
+            "options": [
+              "Pacific Ocean (प्रशांत महासागर) 🌊",
+              "Atlantic Ocean (अटलांटिक)",
+              "Indian Ocean (हिंद महासागर)",
+              "Arctic Ocean (आर्कटिक)"
+            ],
+            "correctAnswer": "Pacific Ocean (प्रशांत महासागर) 🌊",
+            "explanationEnglish": "The Pacific Ocean covers over 30% of Earth's surface and contains the Mariana Trench.",
+            "explanationHindi": "प्रशांत महासागर विश्व का सबसे विशाल और गहरा महासागर है।"
+          },
+          {
+            "questionEnglish": "Which enormous hot desert in Northern Africa is the largest subtropical desert on Earth? 🐪",
+            "questionHindi": "उत्तरी अफ्रीका में फैला विश्व का सबसे बड़ा और विशाल गर्म रेगिस्तान कौन सा है? 🐪",
+            "visual": "🐪 🏜️ ☀️",
+            "options": [
+              "Sahara Desert (सहारा मरुस्थल) 🐪",
+              "Thar Desert (थार मरुस्थल)",
+              "Gobi Desert (गोबी)",
+              "Kalahari Desert"
+            ],
+            "correctAnswer": "Sahara Desert (सहारा मरुस्थल) 🐪",
+            "explanationEnglish": "The Sahara Desert is nearly as large as the entire United States or China!",
+            "explanationHindi": "सहारा रेगिस्तान विश्व का सबसे बड़ा गर्म मरुस्थल है।"
+          }
+        ]
+      },
+      {
+        "id": "class45-gk-2",
+        "titleEnglish": "Indian Constitution & Space Exploration (संविधान व अंतरिक्ष)",
+        "titleHindi": "भारतीय संविधान, महान हस्तियां व इसरो मिशन",
+        "descriptionEnglish": "Learn Dr. B.R. Ambedkar, Indian Constitution, ISRO, and Chandrayaan missions.",
+        "descriptionHindi": "बाबासाहेब अम्बेडकर, संविधान और चंद्रयान-३ का ऐतिहासिक मिशन।",
+        "icon": "🚀",
+        "difficulty": "Advanced",
+        "keyConcepts": [
+          {
+            "english": "Constitution Father = Dr. B.R. Ambedkar 📜",
+            "hindi": "संविधान के जनक = डॉ. बी.आर. अम्बेडकर"
+          },
+          {
+            "english": "Space Agency = ISRO 🚀",
+            "hindi": "भारतीय अंतरिक्ष संस्था = इसरो"
+          },
+          {
+            "english": "Historic Moon Landing = Chandrayaan-3 🌕",
+            "hindi": "चंद्रमा के दक्षिणी ध्रुव पर = चंद्रयान-३"
+          }
+        ],
+        "quizQuestions": [
+          {
+            "questionEnglish": "Who is respectfully honored as the 'Chief Architect & Father of the Indian Constitution'? 📜",
+            "questionHindi": "भारतीय संविधान की ड्राफ्टिंग कमेटी के अध्यक्ष और संविधान के जनक किन्हें कहा जाता है? 📜",
+            "visual": "📜 🏛️ 🇮🇳",
+            "options": [
+              "Dr. B.R. Ambedkar (बाबासाहेब अम्बेडकर) 📜",
+              "Mahatma Gandhi (गांधी जी)",
+              "Jawaharlal Nehru (नेहरू जी)",
+              "Sardar Vallabhbhai Patel"
+            ],
+            "correctAnswer": "Dr. B.R. Ambedkar (बाबासाहेब अम्बेडकर) 📜",
+            "explanationEnglish": "Dr. Bhimrao Ramji Ambedkar led the drafting of the world's longest written constitution for India.",
+            "explanationHindi": "डॉ. भीमराव अम्बेडकर भारतीय संविधान के मुख्य शिल्पी व जनक हैं।"
+          },
+          {
+            "questionEnglish": "What is the name of India's world-renowned space agency located in Bengaluru? 🚀",
+            "questionHindi": "भारत की विश्वप्रसिद्ध अंतरिक्ष अनुसंधान संस्था का नाम क्या है जिसका मुख्यालय बेंगलुरु में है? 🚀",
+            "visual": "🚀 🛰️ 🇮🇳",
+            "options": [
+              "ISRO (इसरो - Indian Space Research Organisation) 🚀",
+              "NASA (नासा)",
+              "ESA (यूरोपीय अंतरिक्ष एजेंसी)",
+              "JAXA (जाक्सा)"
+            ],
+            "correctAnswer": "ISRO (इसरो - Indian Space Research Organisation) 🚀",
+            "explanationEnglish": "ISRO was founded in 1969 and has launched historic lunar and Mars orbital missions.",
+            "explanationHindi": "ISRO भारत की राष्ट्रीय अंतरिक्ष एजेंसी है।"
+          },
+          {
+            "questionEnglish": "Which proud Indian spacecraft made history in August 2023 by landing near the Moon's South Pole? 🌕",
+            "questionHindi": "अगस्त २०२३ में चंद्रमा के अज्ञात दक्षिणी ध्रुव पर तिरंगा फहराने वाले भारत के ऐतिहासिक मिशन का क्या नाम है? 🌕",
+            "visual": "🌕 🇮🇳 🚀",
+            "options": [
+              "Chandrayaan-3 (चंद्रयान-३) 🌕",
+              "Mangalyaan (मंगलयान)",
+              "Aditya-L1 (आदित्य-एल१)",
+              "Gaganyaan (गगनयान)"
+            ],
+            "correctAnswer": "Chandrayaan-3 (चंद्रयान-३) 🌕",
+            "explanationEnglish": "Chandrayaan-3 made India the first nation in human history to land near the lunar south pole!",
+            "explanationHindi": "चंद्रयान-३ ने चांद के दक्षिणी ध्रुव पर सफल लैंडिंग करके इतिहास रचा।"
+          }
+        ]
+      }
+    ]
+  }
+}
